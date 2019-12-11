@@ -1,0 +1,42 @@
+@charset "utf-8";
+.header{
+	background: url(../images/bg1.jpg) no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-size: cover;
+    min-height: 900px;
+    position: relative;
+}
+.atype{
+	color: #fff;
+	text-decoration: none;
+}
+.atype:hover{
+	color: #cc2105;
+}
+body{
+	 background:#fff;
+}
+.purchasepart {
+	text-align: center;
+	width: 100vw;
+	margin: 1vw 0vw 1vw 0vw;
+	padding: 2vw 0vw;
+	background:rgba(255,255,255,0.5);
+}
+.titletr {
+	height: 4vw;
+	font-family:'Roboto', sans-serif;
+	font-size: 2vw;
+}
+
+tr {
+	padding: 0.20vw;
+	font-size: 2vw;
+	font-family:'Roboto', sans-serif;
+	text-align: center;
+	color:#000000;
+	width:30vw;
+}

@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: sa
+    password: 123456
+    url: jdbc:sqlserver://localhost:1433;DatabaseName=BRMS
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+#mybatis:
+#mapper-locations: classpath:Mapping/*Mapping.xml
+#  type-aliases-package: whut.brms.entity
+tomcat:
+  util:
+    http:
+      parser:
+        HttpParser:
+          requestTargetAllow=|,{,}:
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug

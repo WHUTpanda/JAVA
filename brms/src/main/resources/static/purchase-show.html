@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>购书记录</title>
+	<link href="css/main-style.css" rel="stylesheet" type="text/css">
+	<link href="css/purchase-show.css" rel="stylesheet" type="text/css">
+	<script src="js/jQuery.js"></script>
+</head>
+
+<body>
+	<div class="header">
+			<nav class="navbar">
+                <h1><a class="title" href="login.html">图书租售系统<span>Book rental system</span></a></h1>
+				<div class="Navigation">
+					<ul>
+						<li class="navigetionlist"><a href="main.html" class="atype">首页</a></li>
+						<li class="navigetionlist"><a href="rent-show.html" class="atype">租书记录</a></li>
+						<li class="navigetionlist"><a href="purchase-show.html" style="color: antiquewhite">购书记录</a></li>
+						<li class="navigetionlist"><a href="book-show.html" class="atype">书籍总览</a></li>
+					</ul>
+				</div>
+			</nav>
+			<div class="container">
+				<div class="info">
+					<ul>
+						<li class="liinfo" id="username"></li>
+						<li class="liinfo" id="userstatus"></li>
+					</ul>
+				</div>
+  			</div>
+		<div>
+					<table id="purchaseRecord" class="purchasepart">
+						<tr class="titletr">
+							<th>书编号</th>
+							<th>书名</th>
+							<th>购买时间</th>
+						</tr>
+					</table>
+			</div>
+	</div>
+<script src="js/purchaseShow.js"></script>
+</body>
+</html>

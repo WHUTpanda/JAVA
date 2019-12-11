@@ -1,0 +1,57 @@
+@charset "utf-8";
+.header{
+	background: url(../images/bg1.jpg) no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-size: cover;
+    min-height: 900px;
+    position: relative;
+}
+.atype{
+	color: #fff;
+	text-decoration: none;
+}
+.atype:hover{
+	color: #cc2105;
+}
+
+.rentpart {
+	margin: 3vw 0vw 2vw 0vw;
+	padding: 3vw 0vw 2vw 0vw ;
+	font-size: 2vw;
+	text-align: center;
+	width: 100vw;
+	background: rgba(255,255,255,0.5);
+}
+
+th {
+	width: 20vw;
+}
+
+.titletr {
+	height: 3vw;
+}
+
+.returnbutton {
+	text-align: center;
+	height: 2.3vw;
+	font-size: 1.5vw;
+	width: 5.5vw;
+	font-weight:800;
+	font-family: 'Roboto', sans-serif;
+	border-radius:0.35vw;
+	background: #cc2105;
+    color: #fff;
+    letter-spacing: 1px;
+    border: none;
+    -webkit-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    transition: 0.5s all;
+}
+.returnbutton:hover{
+	background: #0EBEFF;
+}

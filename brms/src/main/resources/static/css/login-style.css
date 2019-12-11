@@ -1,0 +1,91 @@
+@charset "utf-8";
+.div1{/*添加背景*/
+	background:url("../images/login2.jpg") center no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+	background-size: cover;
+	position: relative;
+	height: 900px;
+}
+
+
+
+.title {
+	
+}
+
+.article {
+	margin: 5vw 8vw 5vw 66vw;
+	padding: 0;
+	height: 36vw;
+	
+	background: #000000;
+}
+
+label {
+	margin: 2vw 2vw 2vw 1vw;
+	font-size: 2vw;
+	color: #FFFFFF;
+}
+
+.text {
+	margin: 0 1vw 2vw 2vw;
+	height: 2vw;
+	font-size: 2vw;
+	width: 20vw;
+}
+
+
+
+.Line {
+	margin: 1vw;
+	width: 30vw;
+	border-bottom:#1506BF dotted;
+	height: 4.5vw;
+}
+
+
+
+.login-button {
+	margin: 4vw 2vw 2vw 2vw;
+	font-size: 1.5vw;
+	width: 20vw;
+	font-weight:800;
+	font-family: 'Roboto', sans-serif;
+
+	background: #000000;
+    color:#CC2105;
+    letter-spacing: 1px;
+    border-color: #CC2105;
+	border-width: 2px;
+    -webkit-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    transition: 0.5s all;
+}
+.login-button:hover{
+	background:#CC2105;
+	border-right: 0.15vw;
+	color: #fff;
+}
+
+.register {
+	margin: 2vw 0.1vw 0 14vw;
+	height: 3vw;
+	color: aliceblue;
+	font-family: abel;
+	font-size: 0.9vw;
+}
+
+.logintitle {
+	color: #fff;
+	font-size: 2vw;
+	text-align: center;
+}
+
+.Line2 {
+	height: 3vw;
+}
