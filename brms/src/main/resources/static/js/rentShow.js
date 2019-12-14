@@ -17,7 +17,7 @@ function returnBook(Rent_ID) {
     })
 }
 function showRentRecord(data) {
-    $("#rentRecord tr:not(:first)").empty("");//清空除标题外的表格
+    $("#rentRecord").empty("");//清空除标题外的表格
     if(data[0]!=null) {
         for (var i = 0; i < data.length; i++) {
             var tr

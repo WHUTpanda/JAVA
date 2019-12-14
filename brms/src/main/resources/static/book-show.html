@@ -33,25 +33,26 @@
   		</div>
     <br>
 	<ol class="top">
-		<li id ="rentbutton" class="top-item nowselect"><a>待租区</a></li>
-		<li id="bouchasebutton" class="top-item"><a>待售区</a></li>
 		<li class="text"><input type="text" id="inputText" class="texttype" placeholder="请输入需要查找的书名..."></li>
 		<li class="searchbutton"><button type="submit" id="searchBtn" class="booksearch">搜索</button></li>
     </ol>
 		<!--显示待租区域-->
 	<div class="searchresult">
 		<div class="rentplace">
-		<table id="RABtable"class="tabletype">
-			<thead>
-			<tr class="tabletoptitle">
+		<table class="tabletype">
+			<tr>
 				<th class="thbooknametitle">书名</th>
 				<th class="wttitle">作者</th>
 				<th class="pctitle">价格</th>
 				<th class="dptitle">描述</th>
-				<th class="thbttitle">按钮</th>
+				<th class="thbttitle">租借</th>
+				<th class="thbttitleb">购买</th>
 			</tr>
-			</thead>
 		</table>
+			<table id="bookTable" class="tabletype">
+
+			</table>
+
 	</div>
 		<script src="js/bookShow.js"></script>
 	</div></div>

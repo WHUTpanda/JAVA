@@ -73,11 +73,12 @@ label {
 }
 
 .register {
-	margin: 2vw 0.1vw 0 14vw;
+	margin: 2vw 0.1vw 0 2vw;
 	height: 3vw;
 	color: aliceblue;
 	font-family: abel;
 	font-size: 0.9vw;
+	float: left;
 }
 
 .logintitle {

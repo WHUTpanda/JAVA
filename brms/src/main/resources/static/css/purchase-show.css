@@ -22,12 +22,13 @@ body{
 .purchasepart {
 	text-align: center;
 	width: 100vw;
-	margin: 1vw 0vw 1vw 0vw;
-	padding: 2vw 0vw;
+	margin: 0;
+	padding: 0;
+	font-size: 2vw;
 	background:rgba(255,255,255,0.5);
 }
 .titletr {
-	height: 4vw;
+	height: 3vw;
 	font-family:'Roboto', sans-serif;
 	font-size: 2vw;
 }

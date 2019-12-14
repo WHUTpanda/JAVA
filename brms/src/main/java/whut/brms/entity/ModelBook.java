@@ -6,6 +6,25 @@ public class ModelBook {
     private String Book_Writer;
     private String Book_description;
     private float Book_Price;
+    private boolean canBuy=false;
+    private boolean canRent=false;
+
+    public boolean isCanBuy() {
+        return canBuy;
+    }
+
+    public void setCanBuy(boolean canBuy) {
+        this.canBuy = canBuy;
+    }
+
+    public boolean isCanRent() {
+        return canRent;
+    }
+
+    public void setCanRent(boolean canRent) {
+        this.canRent = canRent;
+    }
+
     @Override
     public String toString() {
         return "ModelBook{" +

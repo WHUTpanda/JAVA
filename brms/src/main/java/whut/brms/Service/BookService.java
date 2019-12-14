@@ -26,7 +26,30 @@ public class BookService {
     RentMapper rentMapper;
     @Autowired(required = false)
     PurchaseMapper purchaseMapper;
-
+    //方法名：showAll
+    //功能：显示所有在库的书籍的模板书
+    //参数：无
+    //返回值：List<ModelBook>
+    public List<ModelBook> showAll()
+    {
+        try{
+           List<ModelBook> modelBooks= modelBookMapper.queryAll();
+           for(ModelBook modelBook:modelBooks){
+               List<Book> books=bookMapper.queryBooksByModelbookId(modelBook.getModelBook_ID());
+                for(Book book:books){
+                    if(book.getBook_Status()==1||book.getBook_Status()==3)
+                        modelBook.setCanRent(true);
+                    if(book.getBook_Status()==2||book.getBook_Status()==3)
+                        modelBook.setCanBuy(true);
+                }
+           }
+           return modelBooks;
+        }catch (Exception e)
+        {
+            System.out.println("数据库出错");
+            return null;
+        }
+    }
     //方法名：AddBook
     //功能：获取文本框中的内容来添加书籍
     //参数：String Book_Name,String Book_writer,String Book_description,Float Book_Price,int Book_Status,int num数目

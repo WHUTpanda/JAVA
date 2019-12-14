@@ -41,4 +41,8 @@ public interface ModelBookMapper {
     @Select("select * from ModelBook where ModelBook_ID in " +
             "(select ModelBook_ID from Book where Book_Status=2 or Book_Status=3)")
     List<ModelBook> queryAllPurchase();
+
+    @Select("select* from ModelBook where ModelBook_ID in" +
+            "(select ModelBook_ID from Book where Book_Status=1 or Book_Status=2 or Book_Status=3)")
+    List<ModelBook> queryAll();
 }

@@ -18,20 +18,22 @@
 }
 
 .rentpart {
-	margin: 3vw 0vw 2vw 0vw;
-	padding: 3vw 0vw 2vw 0vw ;
+	margin: 0vw 0vw 0vw 0vw;
+	padding: 0vw 0vw 0vw 0vw ;
 	font-size: 2vw;
 	text-align: center;
 	width: 100vw;
 	background: rgba(255,255,255,0.5);
 }
 
-th {
+td {
 	width: 20vw;
 }
 
 .titletr {
 	height: 3vw;
+	font-family:'Roboto', sans-serif;
+	font-size: 2vw;
 }
 
 .returnbutton {

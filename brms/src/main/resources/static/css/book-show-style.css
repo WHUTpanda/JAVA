@@ -52,8 +52,10 @@ ol.top {
 	background: rgba(255,255,255,0.5);
 	float: left;
 	margin: 0 0vw 0 0vw;
-	padding: 1vw ;
+	padding: 0.1vw ;
 	text-align: center;
+	font-size: 2vw;
+	display: inline-block;
 }
 .atype:hover{
 	color: #cc2105;
@@ -83,9 +85,14 @@ ol.top {
 }
 
 .thbttitle {
-	width: 10vw;
+	width: 8vw;
+	display: inline-block;
 }
-
+.thbtitleb{
+	padding: 0 2vw 0 2vw;
+	width: 8vw;
+	display: inline-block;
+}
 .thbooknametitle {
 	width: 20vw;
 }
@@ -95,11 +102,17 @@ ol.top {
 }
 
 .pctitle {
-	width: 6vw;
+	width: 10vw;
 }
 
 .dptitle {
-	width: 50vw;
+	width: 40vw;
+	display: inline-block;
+}
+.dp {
+	width: 40vw;
+	font-size: 1vw;
+	display: inline-block;
 }
 
 .rentplace {
@@ -108,6 +121,7 @@ ol.top {
 	margin: 2vw 0vw 5vw 0;
 	text-align: center;
 	float: left;
+	display: inline-block;
 }
 
 .buyplace {
@@ -118,7 +132,7 @@ ol.top {
 }
 
 .text {
-	margin: 0 1vw 0 20vw;
+	margin: 0 1vw 0 40vw;
 }
 
 .texttype {
@@ -176,4 +190,10 @@ button.booksearch:hover{
 
 .nowselect {
 	color: rgba(14,190,255,1.00);
+}
+
+.tabletoptitle {
+	padding: 0;
+	margin: 0;
+	text-align: center;
 }

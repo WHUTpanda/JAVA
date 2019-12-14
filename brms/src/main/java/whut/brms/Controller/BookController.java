@@ -12,6 +12,15 @@ import java.util.List;
 public class BookController {
     @Autowired
     BookService bookService;
+    //显示全部书籍
+    @RequestMapping("/show")
+    @ResponseBody
+    List<ModelBook> showAll()
+    {
+        return bookService.showAll();
+    }
+
+    //显示所有可租借书籍
     @RequestMapping("/showRent")
     @ResponseBody
     List<ModelBook> showAllRent()
@@ -24,7 +33,7 @@ public class BookController {
         }
 
     }
-
+    //显示所有可购买书籍
     @RequestMapping("/showPurchase")
     @ResponseBody
     List<ModelBook> showAllPurchase()
@@ -37,7 +46,7 @@ public class BookController {
         }
 
     }
-
+    //借书
     @PostMapping("/rent")
     @ResponseBody
     boolean rent(@RequestParam(value = "User_ID",required = true) String User_ID,
@@ -51,7 +60,7 @@ public class BookController {
         }
         return true;
     }
-
+    //买书
     @PostMapping("/purchase")
     @ResponseBody
     boolean purchase(@RequestParam(value = "User_ID",required = true) String User_ID,
@@ -65,7 +74,7 @@ public class BookController {
             return false;
         }
     }
-
+    //还书
     @PostMapping("/returnBook")
     @ResponseBody
     boolean returnBook(@RequestParam(value = "Rent_ID",required = true) String Rent_ID)
@@ -78,19 +87,22 @@ public class BookController {
             return false;
         }
     }
+    //通过搜索内容进行搜索全部书籍
     @PostMapping("/searchBookInput")
     @ResponseBody
     List<ModelBook> searchByInput(@RequestParam(value = "input",required = true) String Input)
     {
         return  bookService.SearchByInput(Input);
     }
+
+    //通过搜索内容搜索可租借书籍
     @PostMapping("/searchRentBook")
     @ResponseBody
     List<ModelBook> searchRentBook(@RequestParam(value = "Input",required = true) String Input)
     {
         return bookService.SearchByName_Rent(Input);
     }
-
+    //通过搜索内容搜索购买书籍
     @PostMapping("/searchPurchaseBook")
     @ResponseBody
     List<ModelBook> searchPurchaseBook(@RequestParam(value = "Input",required = true) String Input)
@@ -98,7 +110,7 @@ public class BookController {
 
         return bookService.SearchByName_Purchase(Input);
     }
-
+    //添加书籍
     @PostMapping("/add")
     @ResponseBody
     boolean add(@RequestParam(value = "Book_Name",required = true) String Book_Name,
@@ -116,35 +128,35 @@ public class BookController {
             return false;
         }
     }
-
+    //通过模板书id进行查找个体书
     @PostMapping("/bookByModelId")
     @ResponseBody
     List<Book> searchBookByModelBookId(@RequestParam(value = "ModelBook_ID",required = true)String ModelBook_ID)
     {
         return bookService.SearchBookByModelBookID(ModelBook_ID);
     }
-
+    //查询租借书籍记录
     @PostMapping("/queryRent")
     @ResponseBody
     List<Rent> queryRentRecord(@RequestParam(value = "User_ID")String User_ID)
     {
         return bookService.QueryRentRecord(User_ID);
     }
-
+    //查询购买书籍记录
     @PostMapping("/queryPurchase")
     @ResponseBody
     List<Purchase> queryPurchaseRecord(@RequestParam(value = "User_ID")String User_ID)
     {
         return bookService.QueryPurchaseRecord(User_ID);
     }
-
+    //通过模板书id查询模板书
     @PostMapping("/modelBookByModelId")
     @ResponseBody
     ModelBook searchModelBookByModelBookId(@RequestParam(value = "ModelBook_ID",required = true)String ModelBook_ID)
     {
         return bookService.SearchByModelBookID(ModelBook_ID);
     }
-
+    //通过个体书id查找个体书
     @PostMapping("/bookByBookId")
     @ResponseBody
     Book searchBookByBookId(@RequestParam(value = "Book_ID",required = true)String Book_ID)

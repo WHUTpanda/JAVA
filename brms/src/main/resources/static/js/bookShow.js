@@ -1,5 +1,22 @@
-var x=1;
-a();
+if(window.sessionStorage.getItem("searchInput")!=null)
+{
+    var input=window.sessionStorage.getItem("searchInput")
+    $.ajax({
+        url:"/book/searchBookInput",
+        type:"POST",
+        data:"input="+input,
+        success:function (data) {
+            show(data)
+
+        }
+    });
+    window.sessionStorage.removeItem("searchInput")
+}
+else {
+    showAll()
+}
+
+//显示用户身份
 var u=window.sessionStorage.getItem('username');
 $.ajax({
     url:"/user/getUser",
@@ -15,6 +32,16 @@ $.ajax({
             $("#userstatus").text("用户身份: 管理员");
     }
 });
+
+//显示全部书籍
+function showAll(){
+$.ajax({
+    url:"book/show",
+    success:function (data) {
+        show(data)
+    }
+})
+}
 //购买书籍函数
 function purchase(modelBookId,userId) {
     $.ajax({
@@ -43,184 +70,73 @@ function rent(modelBookId,userId) {
         }
     })
 }
-//显示待租书
-function a() {
-    $("#RABtable tr:not(:first)").empty("");
-    $.ajax({
-        url: "book/showRent",
-        success: function (data) {
+//显示书籍
+function show(data) {
+    $("#bookTable").empty("");
             if (data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    var tr = $("<tr><td >" + data[i].book_Name +
-                        "</td><td>" + data[i].book_Writer +
-                        "</td><td>" + data[i].book_Price +
-                        "</td><td>" + data[i].book_description +
-                        "</td><td>" +
-                        "<button class='booksearch' id=" + "rentBtn" + i + ">租 借</button></td>" +
+                    var tr = $("<tr><th class=\"thbooknametitle\" >" + data[i].book_Name +
+                        "</th><th class=\"wttitle\">" + data[i].book_Writer +
+                        "</th><th class=\"pctitle\">" + data[i].book_Price +
+                        "</th><th class=\"dp\">" + data[i].book_description +
+                        "</th><th class=\"thbttitle\">" +
+                        "<button class='booksearch thbttitle' id=" + "rentBtn" + i + ">租 借</button></th>" +
+                        "</th><th>" +
+                        "<button class='booksearch thbttitleb' id=" + "purchaseBtn" + i + ">购 买</button></th>" +
                         "</tr>");
-                    $("#RABtable").append(tr)
+                    $("#bookTable").append(tr)
                 }
+                //给可租借的书籍设置响应按钮
                 for (var i = 0; i < data.length; i++) {
                     (function (i) {
-                        $("#rentBtn" + i).click(function () {
-                            rent(data[i].modelBook_ID, u);
-                            a();
-                        })
-                    })(i);
-                }
-            } else {
-                var tr = $("<tr><td colspan=6 class='bookname'>" + "当前无待租书籍" + "</td></tr>");
-                $("#RABtable").append(tr);
-            }
-        }
-    })
-}
-$("#rentbutton").click(function rentx() {
-    document.getElementById("bouchasebutton").style.color="#fff";
-    document.getElementById("rentbutton").style.color="rgba(14,190,255,1.00)";
-    x=1;
-    $("#RABtable tr:not(:first)").empty("");
-    $.ajax({
-        url:"book/showRent",
-        success:function (data) {
-            if(data[0]!=null) {
-                for (var i = 0; i < data.length; i++) {
-                    var tr = $("<tr><td>" + data[i].book_Name +
-                        "</td><td>" + data[i].book_Writer +
-                        "</td><td>" +data[i].book_Price+
-                        "</td><td>"+data[i].book_description +
-
-                        "</td><td>" +
-                        "<button class='booksearch' id="+"rentBtn"+i+">租 借</button></td></tr>");
-                    $("#RABtable").append(tr)
-                }
-                for (var i = 0; i < data.length; i++) {
-                    (function (i) {
-                        $("#rentBtn" + i).click(function () {
-                            rent(data[i].modelBook_ID,u);
-                            rentx();
-                        })
-                    })(i);
-                }
-            }else
-            {
-                var tr = $("<tr><td colspan=4 class='bookname'>"+"当前无待租书籍"+"</td></tr>");
-                $("#RABtable").append(tr);
-            }
-        }
-    })
-})
-//显示待售书籍
-$("#bouchasebutton").click(function buyx() {
-    x=2;
-    $("#RABtable tr:not(:first)").empty("");
-    document.getElementById("rentbutton").style.color="#fff";
-    document.getElementById("bouchasebutton").style.color="rgba(14,190,255,1.00)";
-    var a1 =document.getElementById("rentbutton");
-    $.ajax({
-        url: "book/showPurchase",
-        success: function (data) {
-            if (data[0] != null) {
-                for (var i = 0; i < data.length; i++) {
-                    var tr = $("<tr>" +
-                        "<td>" + data[i].book_Name +
-                        "</td><td>" + data[i].book_Writer +
-                        "</td><td>" + data[i].book_Price +
-                        "</td><td>" + data[i].book_description +
-                        "</td><td>" +
-                        "<button class='booksearch' id=" + "purchaseBtn" + i + ">购 买</button></td>" +
-                        "</tr>");
-                    $("#RABtable").append(tr)
-                }
-                for (var i = 0; i < data.length; i++) {
-                    (function (i) {
-                        $("#purchaseBtn" + i).click(function () {
-                            purchase(data[i].modelBook_ID, u);
-                            buyx();
-                        })
-                    })(i);
-                }
-            } else {
-                var tr = $("<tr><td colspan=5 class='bookname'>" + "没有待售书籍" + "</td></tr>");
-                $("#RABtable").append(tr);
-            }
-        }
-    })
-})
-//点击搜索按钮
-$("#searchBtn").click(function rentx() {
-    $("#RABtable tr:not(:first)").empty("");//清空除标题外的表格
-    var input=$("#inputText").val();
-    //if(document.getElementById("rentbutton").style.color=="rgba(14,190,255,1.00)")
-    if(x==1)
-    {
-        $.ajax({
-            url:"/book/searchRentBook",
-            type:"POST",
-            data:"Input="+input,
-            success:function (data) {
-                if(data[0]!=null) {
-                    for (var i = 0; i < data.length; i++) {
-                        var tr = $("<tr><td>" + data[i].book_Name +
-                            "</td><td>" + data[i].book_Writer +
-                            "</td><td>" + data[i].book_Price +
-                            "</td><td>" + data[i].book_description +
-
-                            "</td><td>" +
-                            "<button class='booksearch' id=" + "rentBtn" + i + ">租 借</button></td></tr>");
-                        $("#RABtable").append(tr)
-                    }
-                    for (var i = 0; i < data.length; i++) {
-                        (function (i) {
+                        if(data[i].canRent)
+                        {
                             $("#rentBtn" + i).click(function () {
                                 rent(data[i].modelBook_ID, u);
-                                rentx();
+                                showAll()
                             })
-                        })(i);
-                    }
+                        }
+                        else
+                        {
+                            $("#rentBtn" + i).css({'background-color' : 'gray'});
+                            $("#rentBtn" + i).attr("disabled", true);
+                        }
+                    })(i);
                 }
-                else
-                {
-                    var tr = $("<tr><td colspan=5 class='bookname'>"+"没有找到相关书籍"+"</td></tr>");
-                    $("#RABtable").append(tr);
-                }
-            }
-        });
-    }
-    else
-    {
-        $.ajax({
-            url:"/book/searchPurchaseBook",
-            type:"POST",
-            data:"Input="+input,
-            success:function (data) {
-                if (data[0] != null) {
-                    for (var i = 0; i < data.length; i++) {
-                        var tr = $("<tr>" +
-                            "<td>" + data[i].book_Name +
-                            "</td><td>" + data[i].book_Writer +
-                            "</td><td>" + data[i].book_Price +
-                            "</td><td>" + data[i].book_description +
-                            "</td><td>" +
-                            "<button class='booksearch' id=" + "purchaseBtn" + i + ">购 买</button></td>" +
-                            "</tr>");
-                        $("#RABtable").append(tr)
-                    }
+                //给可购买的书籍设置响应按钮
                     for (var i = 0; i < data.length; i++) {
                         (function (i) {
-                            $("#purchaseBtn" + i).click(function () {
-                                purchase(data[i].modelBook_ID, u);
-                                rentx();
-                            })
+                            if(data[i].canBuy)
+                            {
+                                $("#purchaseBtn" + i).click(function () {
+                                    purchase(data[i].modelBook_ID, u);
+                                    showAll()
+                                })
+                            }
+                            else {
+
+                                    $("#purchaseBtn" + i).css({'background-color' : 'gray'});
+                                    $("#purchaseBtn" + i).attr("disabled", true);
+                            }
                         })(i);
-                    }
-                }
-                else
-                {
-                    var tr = $("<tr><td colspan=5 class='bookname'>"+"没有找到相关书籍"+"</td></tr>");
-                    $("#RABtable").append(tr);
                 }
             }
+            else {
+                var tr = $("<tr><td colspan=6 class='bookname'>" + "当前无书籍" + "</td></tr>");
+                $("#bookTable").append(tr);
+            }
+}
+
+//点击搜索按钮
+$("#searchBtn").click(function rentx() {
+    $("#bookTable").empty("");//清空除标题外的表格
+    var input=$("#inputText").val();
+        $.ajax({
+            url:"/book/searchBookInput",
+            type:"POST",
+            data:"input="+input,
+            success:function (data) {
+               show(data)
+            }
         });
-    }
 })
