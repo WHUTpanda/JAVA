@@ -1,0 +1,34 @@
+.header {/*设置页眉的图片布局*/
+	background: url(../images/bg1.jpg) center no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+	background-size: cover;
+	position: relative;
+	opacity: 1;
+}
+footer{
+	text-align: center;
+	font-size: 1.6vw;
+	color: #1004db;
+	padding:3vw 0 0vw 0;
+	margin-top:  2vw;
+}
+address{
+	margin-top:  2vw;
+}
+a.atype:hover{
+	color:  #cc2105;
+}.atype{
+	color: #fff; text-decoration: none;
+}
+button.barsearch:hover{
+    background:#0ebeff;
+	border-radius:0.35vw;
+    -webkit-transform: translateY(10px);
+    -ms-transform: translateY(10px);
+    -o-transform: translateY(10px);
+    -ms-transform: translateY(10px);
+    transform: translateY(10px);
+}

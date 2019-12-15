@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="whut.brms.Mapper.UserMapper">
+
+    <resultMap id="Users" type="whut.brms.entity.Users">
+        <result column="User_ID" jdbcType="VARCHAR" property="User_ID" />
+        <result column="User_Password" jdbcType="VARCHAR" property="User_Password" />
+        <result column="User_Status" jdbcType="INTEGER" property="User_Status" />
+        <result column="Login_Status" jdbcType="INTEGER" property="Login_Status" />
+    </resultMap>
+
+    <select id="queryUserById" resultType="whut.brms.entity.Users" parameterType="String">
+        select * from Users where User_ID = #{User_ID}
+    </select>
+
+</mapper>

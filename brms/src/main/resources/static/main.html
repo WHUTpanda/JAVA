@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>图书租售系统</title>
+	<meta name="roots" content="index,follow"/>
+	<meta name ="description" content="这是网上购书借书系统" />
+	<meta name ="keywords" content="书店图书"/>
+	<meta name="author" content="fz" />
+<link href="css/layout-style.css" rel="stylesheet" type="text/css">
+<link href="css/main-style.css" rel="stylesheet" type="text/css">
+	<script src="js/jQuery.js"></script>
+</head>
+
+<body>
+	<div class="header">
+			<nav class="navbar">
+                <h1><a class="title" href="login.html">图书租售系统<span>Book rental system</span></a></h1>
+				<div class="Navigation">
+					<ul>
+						<li class="navigetionlist"><a href="main.html"  style="color: antiquewhite">首页</a></li>
+						<li class="navigetionlist"><a href="rent-show.html" class="atype">租书记录</a></li>
+						<li class="navigetionlist"><a href="purchase-show.html" class="atype">购书记录</a></li>
+						<li class="navigetionlist"><a href="book-show.html" class="atype">书籍总览</a></li>
+					</ul>
+				</div>
+			</nav>
+		<div class="container">
+            <!-- banner-text -->
+				<div class="info">
+					<ul>
+						<li class="liinfo" id="username"></li>
+						<li class="liinfo" id="userstatus"></li>
+					</ul>
+				</div>
+          <div class="banner-text">
+                <div class="slider-info">
+                    <h3>请输入需要查找的书名</h3>
+					<div>
+         				<input id="input_str" placeholder="请输入您要搜索的内容..." class="search"><br>
+           				<button id="search_btn" class="barsearch">搜索</button>
+   					 </div>
+				</div>
+				<footer>
+			<section><a href="main.html" class="atype">首页</a> <a class="atype">关于我们</a> <a class="atype">服务条款 </a><a class="atype">隐私策略</a> <a class="atype">联系我们</a> <a id="vip" class="atype">升级会员</a></section>
+			<address>通讯地址：武汉理工大学海鸿four栋399&nbsp;&nbsp;电话：123456789#&nbsp;&nbsp;邮箱：1101201120@qq.com</address>
+		</footer>
+            </div>
+  		</div>
+    </div>
+<script src="js/main.js"></script>
+</body>
+</html>

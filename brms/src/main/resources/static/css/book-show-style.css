@@ -1,0 +1,199 @@
+@charset "utf-8";
+.header{
+	background: url(../images/bg1.jpg) no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-size: cover;
+    min-height: 170px;
+    position: relative;
+}
+.top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  list-style: none;
+  background: rgba(255,255,255,0.5);
+  border-radius: 0.25rem;
+}
+ol.top {
+    background: none;
+    margin: 3vw 0 0 0;
+    padding: 1em 2em;
+    
+}
+.top-item  {
+	margin: 0 1vw 0 1vw;
+	padding: 0vw;
+	border-radius: 0.15vw;
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.5vw;
+	height: 2vw;
+	width: 6.8vw;
+}
+.center{
+	text-align: center;
+}
+.bookname{
+	margin-right: 4vw;
+	font-size: 1.4vw;/*设置字体大小*/
+    font-family: 'Roboto', sans-serif;/*设置字体类型*/
+	color: #1A1DC5;
+	font-weight: 600;
+}
+.tabletype{
+	width: 100vw;
+	background: rgba(255,255,255,0.5);
+	float: left;
+	margin: 0 0vw 0 0vw;
+	padding: 0.1vw ;
+	text-align: center;
+	font-size: 2vw;
+	display: inline-block;
+}
+.atype:hover{
+	color: #cc2105;
+}
+.atype{
+	color: #fff;
+	text-decoration: none;
+}
+.rentbuylableplace{
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 4vw;
+	background-color:#ffff12;
+}
+.searchresult {
+	width: 100vw;
+	
+	
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-size: cover;
+    min-height: 850px;
+    position: relative;
+}
+
+.thbttitle {
+	width: 8vw;
+	display: inline-block;
+}
+.thbtitleb{
+	padding: 0 2vw 0 2vw;
+	width: 8vw;
+	display: inline-block;
+}
+.thbooknametitle {
+	width: 20vw;
+}
+
+.wttitle {
+	width: 10vw;
+}
+
+.pctitle {
+	width: 10vw;
+}
+
+.dptitle {
+	width: 40vw;
+	display: inline-block;
+}
+.dp {
+	width: 40vw;
+	font-size: 1vw;
+	display: inline-block;
+}
+
+.rentplace {
+	width:100vw;
+	padding: 0;
+	margin: 2vw 0vw 5vw 0;
+	text-align: center;
+	float: left;
+	display: inline-block;
+}
+
+.buyplace {
+	width: 47.3vw;
+	text-align: center;
+	float: left;
+	background-color: #e9ecef;
+}
+
+.text {
+	margin: 0 1vw 0 40vw;
+}
+
+.texttype {
+	font-size: 1.5vw;
+	font-family:'Roboto', sans-serif;
+	border-radius: 0.1vw;
+}
+
+.booksearch {
+	font-size: 1.5vw;
+	width: 5.5vw;
+	color:aqua;
+	font-weight:800;
+	border-color:yellow;
+	font-family: 'Roboto', sans-serif;
+	border-radius:0.35vw;
+	background: #cc2105;
+    color: #fff;
+    letter-spacing: 1px;
+    border: none;
+    -webkit-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    transition: 0.5s all;
+}
+button.booksearch:hover{
+	border-radius: 0.35vw;
+	background-color: #0EBEFF;
+}
+.booksearch:hover{
+	border-radius: 0.35vw;
+	background-color: #0EBEFF;
+}
+.searchbutton {
+	margin: 0 1vw 0 1vw;
+}
+
+.sttitle {
+	width: 10vw;
+}
+
+.top-item-place {
+	width: 15vw;
+}
+
+.top-lable {
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	font-size:1.5vw;
+	font-family:'Roboto', sans-serif;
+	width: 20vw;
+}
+
+.nowselect {
+	color: rgba(14,190,255,1.00);
+}
+
+.tabletoptitle {
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}

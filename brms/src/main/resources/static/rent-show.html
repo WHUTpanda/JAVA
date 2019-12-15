@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>租书记录</title>
+	<link href="css/main-style.css" rel="stylesheet" type="text/css">
+	<link href="css/rent-show.css" rel="stylesheet" type="text/css">
+	<script src="js/jQuery.js"></script>
+</head>
+
+<body>
+	<div class="header">
+			<nav class="navbar">
+                <h1><a class="title" href="login.html">图书租售系统<span>Book rental system</span></a></h1>
+				<div class="Navigation">
+					<ul>
+						<li class="navigetionlist"><a href="main.html" class="atype">首页</a></li>
+						<li class="navigetionlist"><a href="rent-show.html" style="color: antiquewhite">租书记录</a></li>
+						<li class="navigetionlist"><a href="purchase-show.html" class="atype">购书记录</a></li>
+						<li class="navigetionlist"><a href="book-show.html" class="atype">书籍总览</a></li>
+					</ul>
+				</div>
+			</nav>
+		<div class="container">
+            <!-- banner-text -->
+				<div class="info">
+					<ul>
+						<li class="liinfo" id="username"></li>
+						<li class="liinfo" id="userstatus"></li>
+					</ul>
+				</div>
+
+			<div>
+				<table class="rentpart">
+					<tr class="titletr">
+						<td>书籍编号</td>
+						<td>书名</td>
+						<td>借书时间</td>
+						<td>归还时间</td>
+					</tr>
+				</table>
+				<table  id="rentRecord" class="rentpart"></table>
+			</div>
+		</div>
+</div>
+	</div>
+	<script src="js/rentShow.js"></script>
+</body>
+</html>
