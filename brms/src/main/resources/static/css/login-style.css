@@ -17,21 +17,20 @@
 }
 
 .article {
-	margin: 5vw 8vw 5vw 66vw;
+	margin: 5vw 3vw 5vw 70vw;
 	padding: 0;
 	height: 36vw;
-	
-	background: #000000;
+	background:#1234;
 }
 
 label {
-	margin: 2vw 2vw 2vw 1vw;
+	margin: 2vw 2vw 2vw 2vw;
 	font-size: 2vw;
 	color: #FFFFFF;
 }
 
 .text {
-	margin: 0 1vw 2vw 2vw;
+	margin: 1vw 1vw 1vw 2vw;
 	height: 2vw;
 	font-size: 2vw;
 	width: 20vw;
@@ -40,8 +39,8 @@ label {
 
 
 .Line {
-	margin: 1vw;
-	width: 30vw;
+	margin: 0vw;
+	width: 24.5vw;
 	border-bottom:#1506BF dotted;
 	height: 4.5vw;
 }
@@ -52,14 +51,14 @@ label {
 	margin: 4vw 2vw 2vw 2vw;
 	font-size: 1.5vw;
 	width: 20vw;
-	font-weight:800;
+	font-weight:600;
 	font-family: 'Roboto', sans-serif;
 
-	background: #000000;
+	background: #1234;
     color:#CC2105;
     letter-spacing: 1px;
-    border-color: #CC2105;
-	border-width: 2px;
+    border-color:#CC2105;
+	border-width: 1.5px;
     -webkit-transition: 0.5s all;
     -o-transition: 0.5s all;
     -moz-transition: 0.5s all;
@@ -73,7 +72,7 @@ label {
 }
 
 .register {
-	margin: 2vw 0.1vw 0 2vw;
+	margin: 2vw 1vw 0 2vw;
 	height: 3vw;
 	color: aliceblue;
 	font-family: abel;
@@ -85,6 +84,7 @@ label {
 	color: #fff;
 	font-size: 2vw;
 	text-align: center;
+	width: 24.5vw;
 }
 
 .Line2 {

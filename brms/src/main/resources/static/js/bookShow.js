@@ -80,9 +80,9 @@ function show(data) {
                         "</th><th class=\"pctitle\">" + data[i].book_Price +
                         "</th><th class=\"dp\">" + data[i].book_description +
                         "</th><th class=\"thbttitle\">" +
-                        "<button class='booksearch thbttitle' id=" + "rentBtn" + i + ">租 借</button></th>" +
+                        "<button class=\"booksearch\" id=" + "rentBtn" + i + ">租 借</button></th>" +
                         "</th><th>" +
-                        "<button class='booksearch thbttitleb' id=" + "purchaseBtn" + i + ">购 买</button></th>" +
+                        "<button class=\"booksearch\" id=" + "purchaseBtn" + i + ">购 买</button></th>" +
                         "</tr>");
                     $("#bookTable").append(tr)
                 }
