@@ -13,12 +13,17 @@ import java.util.List;
 @Repository
 public interface PurchaseMapper {
     @Results({
+            @Result(property = "Purchase_ID", column = "Purchase_ID"),
             @Result(property = "Book_ID", column = "Book_ID"),
             @Result(column = "User_ID", property = "User_ID"),
             @Result(property = "Purchase_Date", column = "Purchase_Date"),
+            @Result(column = "Handle", property = "Handle")
     })
     @Select("select * from Purchase where User_ID=#{User_ID}")
     List<Purchase> queryPurchaseByUserId(String User_ID);
-    @Insert("insert into Purchase(Book_ID,User_ID,Purchase_Date) values(#{Book_ID},#{User_ID},#{Purchase_Date})")
-    void insertPurchase(String Book_ID, String User_ID, Date Purchase_Date);
+    @Insert("insert into Purchase(Book_ID,User_ID,Purchase_Date,Purchase_ID,Handle) " +
+            "values(#{Book_ID},#{User_ID},#{Purchase_Date},#{Purchase_ID},#{Handle})")
+    void insertPurchase(String Book_ID, String User_ID, Date Purchase_Date,String Purchase_ID,int Handle);
+    @Select("select * from Purchase where Handle= 1")
+    List<Purchase> queryRequesting();
 }

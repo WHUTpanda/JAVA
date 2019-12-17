@@ -37,7 +37,7 @@ public class UserController {
             return false;
         }
     }
-    @RequestMapping(value = "/Upgrade",method =RequestMethod.GET)
+    @RequestMapping(value = "/Upgrade",method =RequestMethod.POST)
     public boolean Upgrade(@RequestParam(value = "User_ID",required = true) String User_ID)
     {
         try {
@@ -51,6 +51,34 @@ public class UserController {
     @RequestMapping(value = "/getUser",method = RequestMethod.POST)
     @ResponseBody
     public Users getUser(@RequestParam(value = "User_ID",required = true) String User_ID) {return userService.getUserById(User_ID);
+    }
+
+    /**
+     * 支付
+     * @param User_ID
+     * @param price
+     * @return
+     */
+    @PostMapping(value = "/pay")
+    @ResponseBody
+    public int pay(@RequestParam(value = "User_ID",required = true) String User_ID,
+                   @RequestParam(value = "price",required = true) float price)
+    {
+        return userService.pay(User_ID,price);
+    }
+
+    /**
+     * 充值
+     * @param User_ID
+     * @param amount
+     * @return
+     */
+    @PostMapping("/recharge")
+    @ResponseBody
+    public boolean recharge(@RequestParam(value = "User_ID",required = true) String User_ID,
+                            @RequestParam(value = "amount",required = true) float amount)
+    {
+        return userService.recharge(User_ID,amount);
     }
 
 }

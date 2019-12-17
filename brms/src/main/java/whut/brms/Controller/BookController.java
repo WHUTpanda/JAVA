@@ -49,16 +49,15 @@ public class BookController {
     //借书
     @PostMapping("/rent")
     @ResponseBody
-    boolean rent(@RequestParam(value = "User_ID",required = true) String User_ID,
+    String rent(@RequestParam(value = "User_ID",required = true) String User_ID,
               @RequestParam(value = "ModelBook_ID",required = true) String ModelBook_ID)
     {
         try {
-            bookService.RentBook(User_ID, ModelBook_ID);
+            return bookService.RentBook(User_ID, ModelBook_ID);//
         }catch (Exception e)
         {
-            return false;
+            return null;
         }
-        return true;
     }
     //买书
     @PostMapping("/purchase")
@@ -121,7 +120,7 @@ public class BookController {
                 @RequestParam(value = "num",required = true) int num)
     {
         try{
-            bookService.AddBook(Book_Name,Book_Writer,Book_descrtption,Book_Price,Book_Status,num);
+          //  bookService.AddBook(Book_Name,Book_Writer,Book_descrtption,Book_Price,Book_Status,num);
             return true;
         }catch (Exception e)
         {

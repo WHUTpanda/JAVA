@@ -38,11 +38,11 @@ public class UserService {
     返回值：无
      */
     @Transactional
-    public boolean RegisterUser(String Username, String Password)  {
-        if(userMapper.queryUserById(Username)== null)
+    public boolean RegisterUser(String UserId, String Password,String pn,String name)  {
+        if(userMapper.queryUserById(UserId)== null)
         {
             try{
-                userMapper.insertUser(Username,Password,1,1);
+                userMapper.insertUser(UserId,Password,1,0,pn,name);
                 return true;
             }catch (Exception e)
             {
@@ -65,6 +65,41 @@ public class UserService {
     @Transactional
     public void UpgradeMember(String Username)  {
         userMapper.updateUser_Status(Username);
+    }
+
+    /**
+     * 充值
+     */
+    @Transactional
+    public boolean recharge(String userId,float amount)
+    {
+        try{
+            userMapper.recharge(amount, userId);
+            return false;
+        }catch (Exception e)
+        {
+            return false;
+        }
+    }
+    /**
+     * 支付
+     */
+    @Transactional
+    public int pay(String userId,float price)
+    {
+        try{
+            Users users=userMapper.queryUserById(userId);
+            if(users.getUser_Balance()>=price) {
+                userMapper.pay(userId, price);
+                return 1;
+            }
+            else {
+                return 2;
+            }
+        }catch (Exception e)
+        {
+            return 0;
+        }
     }
 
 }

@@ -6,24 +6,8 @@ public class ModelBook {
     private String Book_Writer;
     private String Book_description;
     private float Book_Price;
-    private boolean canBuy=false;
-    private boolean canRent=false;
-
-    public boolean isCanBuy() {
-        return canBuy;
-    }
-
-    public void setCanBuy(boolean canBuy) {
-        this.canBuy = canBuy;
-    }
-
-    public boolean isCanRent() {
-        return canRent;
-    }
-
-    public void setCanRent(boolean canRent) {
-        this.canRent = canRent;
-    }
+    private int canBuyNum=0;
+    private int canRentNum=0;
 
     @Override
     public String toString() {
@@ -36,7 +20,21 @@ public class ModelBook {
                 '}';
     }
 
+    public int getCanRentNum() {
+        return canRentNum;
+    }
 
+    public void setCanRentNum() {
+        this.canRentNum++;
+    }
+
+    public int getCanBuyNum() {
+        return canBuyNum;
+    }
+
+    public void setCanBuyNum() {
+        this.canBuyNum++;
+    }
 
     public String getModelBook_ID() {
         return ModelBook_ID;

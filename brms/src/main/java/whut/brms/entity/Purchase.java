@@ -3,11 +3,22 @@ package whut.brms.entity;
 import java.sql.Date;
 
 public class Purchase {
+    private String Purchase_ID;
     private String User_ID;
     private String Book_ID;
     private String book_name;
     private float book_price;
     private Date Purchase_Date;
+    private int handle;
+
+    public int getHandle() {
+        return handle;
+    }
+
+    public void setHandle(int handle) {
+        this.handle = handle;
+    }
+
     @Override
     public String toString() {
         return "Purchase{" +
@@ -19,6 +30,13 @@ public class Purchase {
                 '}';
     }
 
+    public String getPurchase_ID() {
+        return Purchase_ID;
+    }
+
+    public void setPurchase_ID(String purchase_ID) {
+        Purchase_ID = purchase_ID;
+    }
 
     public void setBook_ID(String book_ID) {
         Book_ID = book_ID;

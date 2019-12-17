@@ -13,6 +13,33 @@ public class Users {
     private String User_Password;
     private Integer User_Status;
     private Integer Login_Status;
+    private float User_Balance;
+    private String userName;
+    private String phoneNum;
+
+    public float getUser_Balance() {
+        return User_Balance;
+    }
+
+    public void setUser_Balance(float user_Balance) {
+        User_Balance = user_Balance;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
 
     public String getUser_ID() {
         return User_ID;

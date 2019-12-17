@@ -9,6 +9,15 @@ public class Rent {
     private Date Rent_Date;
     private Date Return_Date;
     private String Rent_ID;
+    private int handle;//0无请求，1租请求，2还请求
+
+    public int getHandle() {
+        return handle;
+    }
+
+    public void setHandle(int handle) {
+        this.handle = handle;
+    }
 
     @Override
     public String toString() {

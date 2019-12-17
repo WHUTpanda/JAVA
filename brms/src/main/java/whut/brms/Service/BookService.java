@@ -3,10 +3,7 @@ package whut.brms.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import whut.brms.Mapper.BookMapper;
-import whut.brms.Mapper.ModelBookMapper;
-import whut.brms.Mapper.PurchaseMapper;
-import whut.brms.Mapper.RentMapper;
+import whut.brms.Mapper.*;
 import whut.brms.entity.Book;
 import whut.brms.entity.ModelBook;
 import whut.brms.entity.Purchase;
@@ -22,10 +19,15 @@ public class BookService {
 
     @Autowired(required = false)
     ModelBookMapper modelBookMapper;
+
     @Autowired(required = false)
     RentMapper rentMapper;
+
     @Autowired(required = false)
     PurchaseMapper purchaseMapper;
+
+    @Autowired
+    UserService userService;
     //方法名：showAll
     //功能：显示所有在库的书籍的模板书
     //参数：无
@@ -38,9 +40,9 @@ public class BookService {
                List<Book> books=bookMapper.queryBooksByModelbookId(modelBook.getModelBook_ID());
                 for(Book book:books){
                     if(book.getBook_Status()==1||book.getBook_Status()==3)
-                        modelBook.setCanRent(true);
+                        modelBook.setCanRentNum();
                     if(book.getBook_Status()==2||book.getBook_Status()==3)
-                        modelBook.setCanBuy(true);
+                        modelBook.setCanBuyNum();
                 }
            }
            return modelBooks;
@@ -49,29 +51,6 @@ public class BookService {
             System.out.println("数据库出错");
             return null;
         }
-    }
-    //方法名：AddBook
-    //功能：获取文本框中的内容来添加书籍
-    //参数：String Book_Name,String Book_writer,String Book_description,Float Book_Price,int Book_Status,int num数目
-    //返回值：boolean
-    @Transactional//回滚注解
-    public boolean AddBook(String Book_Name, String Book_writer, String Book_description, float Book_Price, int Book_Status, int num)  {
-        ModelBook AddedRt = modelBookMapper.queryModelBookByWriterName(Book_Name, Book_writer);
-        String ModelBook_ID;
-        if (AddedRt == null) {
-            String NowTime = String.valueOf(System.currentTimeMillis());
-            modelBookMapper.insertModelBook(NowTime,Book_writer,Book_Name,Book_description,Book_Price);
-            ModelBook_ID=NowTime;
-        } else {
-            ModelBook_ID=AddedRt.getModelBook_ID();
-        }
-
-        for (int i = 0; i < num; i++) {
-            String nowTime = String.valueOf(System.currentTimeMillis());
-            Date date = new Date(System.currentTimeMillis());
-            bookMapper.insertBook(nowTime,Book_Status,date,ModelBook_ID);
-        }
-        return true;
     }
 
     //方法名：SearchByName_Rent
@@ -118,20 +97,26 @@ public class BookService {
     //方法名：RentBook
     //功能：租书
     //参数：用户名，模板书编号
-    //返回值：void
+    //返回值：1成功，2失败，3余额不足
     @Transactional
-    public void RentBook(String User_ID, String ModelBook_ID) {
+    public String RentBook(String User_ID, String ModelBook_ID) {
         List<Book> books=bookMapper.queryBooksByModelbookId(ModelBook_ID);
+        float price=modelBookMapper.queryModelBookById(ModelBook_ID).getBook_Price();
         for(Book book:books)
         {
             if(book.getBook_Status()==1||book.getBook_Status()==3)
             {
+                if(userService.pay(User_ID,price)==2)//支付押金
+                    return "3";//余额不足
                 bookMapper.updateBookStatus(4,book.getBook_ID());
                 Date date=new Date(System.currentTimeMillis());
-                rentMapper.insertRent(String.valueOf(System.currentTimeMillis()),User_ID,book.getBook_ID(),date);
-                break;
+                //设置为请求状态
+                String id=String.valueOf(System.currentTimeMillis());
+                rentMapper.insertRent(id,User_ID,book.getBook_ID(),date,1);
+                return id;
             }
         }
+        return "2";
     }
 
     //方法名：PurchaseBook
@@ -147,7 +132,7 @@ public class BookService {
             {
                 bookMapper.updateBookStatus(5,book.getBook_ID());
                 Date date=new Date(System.currentTimeMillis());
-                purchaseMapper.insertPurchase(book.getBook_ID(),User_ID,date);
+                purchaseMapper.insertPurchase(book.getBook_ID(),User_ID,date,String.valueOf(System.currentTimeMillis()),1);
                 break;
             }
         }
@@ -227,7 +212,17 @@ public class BookService {
     public List<ModelBook> SearchByInput(String input) {
         try {
             input="%"+input+"%";
-            return modelBookMapper.queryPurchaseModelBookByInput(input);
+            List<ModelBook> modelBooks=modelBookMapper.queryModelBookByInput(input);
+            for(ModelBook modelBook:modelBooks) {
+                List<Book> books = bookMapper.queryBooksByModelbookId(modelBook.getModelBook_ID());
+                for (Book book : books) {
+                    if (book.getBook_Status() == 1 || book.getBook_Status() == 3)
+                        modelBook.setCanRentNum();
+                    if (book.getBook_Status() == 2 || book.getBook_Status() == 3)
+                            modelBook.setCanBuyNum();
+                }
+            }
+            return modelBooks;
         }catch(Exception e){
             System.out.println("访问数据库出错");
         }

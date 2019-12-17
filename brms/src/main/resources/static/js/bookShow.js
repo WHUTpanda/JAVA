@@ -18,17 +18,19 @@ else {
 
 //显示用户身份
 var u=window.sessionStorage.getItem('username');
+var status=0
 $.ajax({
     url:"/user/getUser",
     type:'POST',
     data:'User_ID='+u,
     success:function (data) {
         $("#username").text ("用户名: "+data.user_ID);
-        if(data.user_Status==1)
+        status=data.user_Status
+        if(status==1)
             $("#userstatus").text("用户身份: 普通用户");
-        else if(data.user_Status==2)
+        else if(status==2)
             $("#userstatus").text("用户身份: 会员");
-        else if(data.user_Status==3)
+        else if(status==3)
             $("#userstatus").text("用户身份: 管理员");
     }
 });
@@ -89,7 +91,7 @@ function show(data) {
                 //给可租借的书籍设置响应按钮
                 for (var i = 0; i < data.length; i++) {
                     (function (i) {
-                        if(data[i].canRent)
+                        if(data[i].canRent&&status!=1)
                         {
                             $("#rentBtn" + i).click(function () {
                                 rent(data[i].modelBook_ID, u);
