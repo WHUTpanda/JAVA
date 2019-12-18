@@ -1,24 +1,20 @@
 package whut.brms.entity;
 
-import java.util.Date;
-
 public class Book {
     private String Book_ID;
-    private int Book_Status;
-    private Date Entrance_Date;
-    private String ModelBook_ID;
+    private String Book_Name;
+    private String Book_Writer;
+    private String Book_description;
+    private float Book_Price;
+    private int num;
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "Book_ID='" + Book_ID + '\'' +
-                ", Book_Status=" + Book_Status +
-                ", Entrance_Date=" + Entrance_Date +
-                ", ModelBook_ID='" + ModelBook_ID + '\'' +
-                '}';
+    public int getNum() {
+        return num;
     }
 
-
+    public void setNum(int num) {
+        this.num = num;
+    }
 
     public String getBook_ID() {
         return Book_ID;
@@ -28,27 +24,35 @@ public class Book {
         Book_ID = book_ID;
     }
 
-    public int getBook_Status() {
-        return Book_Status;
+    public String getBook_Name() {
+        return Book_Name;
     }
 
-    public void setBook_Status(int book_Status) {
-        Book_Status = book_Status;
+    public void setBook_Name(String book_Name) {
+        Book_Name = book_Name;
     }
 
-    public Date getEntrance_Date() {
-        return Entrance_Date;
+    public String getBook_Writer() {
+        return Book_Writer;
     }
 
-    public void setEntrance_Date(Date entrance_Date) {
-        Entrance_Date = entrance_Date;
+    public void setBook_Writer(String book_Writer) {
+        Book_Writer = book_Writer;
     }
 
-    public String getModelBook_ID() {
-        return ModelBook_ID;
+    public String getBook_description() {
+        return Book_description;
     }
 
-    public void setModelBook_ID(String modelBook_ID) {
-        ModelBook_ID = modelBook_ID;
+    public void setBook_description(String book_description) {
+        Book_description = book_description;
+    }
+
+    public float getBook_Price() {
+        return Book_Price;
+    }
+
+    public void setBook_Price(float book_Price) {
+        Book_Price = book_Price;
     }
 }

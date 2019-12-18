@@ -9,7 +9,16 @@ public class Rent {
     private Date Rent_Date;
     private Date Return_Date;
     private String Rent_ID;
-    private int handle;//0无请求，1租请求，2还请求
+    private int handle;//0请求完成或无请求，1租请求，2还请求
+    private int num;
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
 
     public int getHandle() {
         return handle;

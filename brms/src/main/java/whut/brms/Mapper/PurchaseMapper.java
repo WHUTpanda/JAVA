@@ -1,9 +1,6 @@
 package whut.brms.Mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import whut.brms.entity.Purchase;
 
@@ -21,9 +18,16 @@ public interface PurchaseMapper {
     })
     @Select("select * from Purchase where User_ID=#{User_ID}")
     List<Purchase> queryPurchaseByUserId(String User_ID);
-    @Insert("insert into Purchase(Book_ID,User_ID,Purchase_Date,Purchase_ID,Handle) " +
-            "values(#{Book_ID},#{User_ID},#{Purchase_Date},#{Purchase_ID},#{Handle})")
-    void insertPurchase(String Book_ID, String User_ID, Date Purchase_Date,String Purchase_ID,int Handle);
+    @Insert("insert into Purchase(Book_ID,User_ID,Purchase_Date,Purchase_ID,Handle,Num) " +
+            "values(#{Book_ID},#{User_ID},#{Purchase_Date},#{Purchase_ID},#{Handle},#{Num})")
+    void insertPurchase(String Book_ID, String User_ID, Date Purchase_Date,String Purchase_ID,int Handle,int num);
     @Select("select * from Purchase where Handle= 1")
     List<Purchase> queryRequesting();
+
+    /**
+     * 完成请求
+     * @param buyId
+     */
+    @Update("update Purchase set Handle=1 where Purchase_ID=#{buyId}")
+    void done(String buyId);
 }

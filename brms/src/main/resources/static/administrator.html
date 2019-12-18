@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>管理员界面</title>
+<link href="css/administrator.css" rel="stylesheet" type="text/css">
+	<script src="js/jQuery.js"></script>
+</head>
+
+<body>
+	<div class="header">
+		<nav class="systitle">
+			<h2><a href="index.html" class="atype">图书租售系统管理员界面</a><span>Book rental system</span></h2>
+		</nav>
+		<ol class="top">
+			<li class="text"><input type="text" id="inputText" class="texttype" placeholder="请输入需要查找的号码..."></li>
+			<li class="searchbutton"><button type="submit" id="searchBtn" class="booksearch">搜索</button></li>
+   		</ol>
+		
+		<div class="showplace">
+			<table  class="showtable">
+				<tr>
+					<th>查询号码</th>
+					<th>用户名</th>
+					<th>书名</th>
+					<th>操作类型</th>
+					<th>数量</th>
+					<th>操作按钮</th>
+				</tr>
+			</table>
+			<table id="OrderList" class="showtable">
+
+			</table>
+		</div>
+	</div>
+<script src="js/administrator.js"></script>
+</body>
+</html>

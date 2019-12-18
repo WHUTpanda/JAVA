@@ -14,21 +14,21 @@
                 <h1><a class="title" href="index.html">图书租售系统<span>Book rental system</span></a></h1>
 				<div class="Navigation">
 					<ul>
-						<li class="navigetionlist"><a href="main.html" class="atype">首页</a></li>
-						<li class="navigetionlist"><a href="rent-show.html" style="color: antiquewhite">租书记录</a></li>
-						<li class="navigetionlist"><a href="purchase-show.html" class="atype">购书记录</a></li>
+						<li class="navigetionlist"><a href="main.html"  class="atype">首页</a></li>
 						<li class="navigetionlist"><a href="book-show.html" class="atype">书籍总览</a></li>
+						<li class="navigetionlist"><a class="atype" href="shopping.html">购物车</a></li>
+						<li class="navigetionlist">
+							<select class="selected">
+								<option value="Info.html">查看个人信息</option>
+								<option value="rent-show.html" selected >租书记录</option>
+								<option value="purchase-show.html">购书记录</option>
+							</select>
+						</li>
 					</ul>
 				</div>
 			</nav>
 		<div class="container">
             <!-- banner-text -->
-				<div class="info">
-					<ul>
-						<li class="liinfo" id="username"></li>
-						<li class="liinfo" id="userstatus"></li>
-					</ul>
-				</div>
 
 			<div>
 				<table class="rentpart">
@@ -43,7 +43,6 @@
 			</div>
 		</div>
 </div>
-	</div>
 	<script src="js/rentShow.js"></script>
 </body>
 </html>

@@ -22,7 +22,8 @@ public interface UserMapper {
     })
  @Select( "select * from Users where User_ID = #{User_ID}" )
     Users queryUserById(String User_ID);
- @Insert("insert into Users (User_ID, User_Password, User_Status,User_Balance,PhoneNumber,User_Name) values (#{User_ID},#{User_Password},#{User_Status},#{User_Balance},#{PhoneNumber},#{User_Name})")
+ @Insert("insert into Users (User_ID, User_Password, User_Status,User_Balance,PhoneNumber,User_Name) " +
+         "values (#{User_ID},#{User_Password},#{User_Status},#{User_Balance},#{PhoneNumber},#{User_Name})")
     void insertUser(String User_ID, String User_Password,int User_Status,float User_Balance,String PhoneNumber,String User_Name);
  @Update("update Users set User_Status=2 where User_ID=#{User_ID}")
     void updateUser_Status(String User_ID);

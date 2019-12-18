@@ -1,13 +1,22 @@
 package whut.brms.entity;
 
-import java.util.Date;
-
 public class Manager {
     private String id;
-    private boolean type;//1为租借中，2为购买，3为归还
+    private int  type;//1为租借中，2为购买，3为归还
     private String bookName;
     private String bookId;
     private int handle;
+    private int num;
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+
+        this.userId = userId;
+    }
 
     public String getId() {
         return id;
@@ -17,11 +26,19 @@ public class Manager {
         this.id = id;
     }
 
-    public boolean isType() {
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public int getType() {
         return type;
     }
 
-    public void setType(boolean type) {
+    public void setType(int type) {
         this.type = type;
     }
 

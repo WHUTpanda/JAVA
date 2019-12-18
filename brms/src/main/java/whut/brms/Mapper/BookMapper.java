@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import whut.brms.entity.Book;
 
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -19,13 +18,12 @@ public interface BookMapper {
     @Select("select * from Book where Book_ID=#{Book_ID}")
     Book queryBookById(String Id);
 
+    @Select("select * from Book where Book_Name=#{input}")
+    List<Book> searchByInput(String input);
 
-    @Update("Update Book set Book_Status=#{Book_Status} where Book_ID=#{Book_ID}")
-    void updateBookStatus(int Book_Status,String Book_ID);
+    @Select("select * from Book where Num>0")
+    List<Book> showAll();
 
-    @Select("select * from Book  where ModelBook_ID=#{ModelBook_ID}")
-    List<Book> queryBooksByModelbookId(String Id);
-
-    @Select("select Book_ID from Book where Book_Status=#{Book_Status}")
-    String queryBookIdByStatus(int status);
+    @Update("update Book set Num=Num-#{num} where Book_ID = #{bookId}")
+    void subBook(int num,String bookId);
 }

@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>选择书籍</title>
+	<link href="css/main-style.css" rel="stylesheet" type="text/css">
+	<link href="css/selected.css" rel="stylesheet" type="text/css">
+	<script src="js/jQuery.js"></script>
+</head>
+
+<body>
+	<div class="header">
+		<nav class="navbar">
+                <h1><a class="title" href="index.html">图书租售系统<span>Book rental system</span></a></h1>
+				<div class="Navigation">
+					<ul>
+						<li class="navigetionlist"><a href="main.html"  class="atype">首页</a></li>
+						<li class="navigetionlist"><a href="book-show.html" class="atype">书籍总览</a></li>
+						<li class="navigetionlist"><a href="shopping.html" class="atype">购物车</a></li>
+						<li class="navigetionlist">
+							<select>
+								<option value="1" selected>-----个人信息-----</option>
+								<option  value="Info.html">查看个人信息</option>
+								<option value="rent-show.html">租书记录</option>
+								<option value="purchase-show.html">购书记录</option>
+							</select>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		<div class="place">
+			<div class="container">
+				<table class="showtable">
+					<tr>
+						<th class="first">书名</th>
+						<th id="Book_Name" class="second"></th>
+					</tr>
+					<tr>
+						<th>作者</th>
+						<th id="Book_Writer"></th>
+					</tr>
+					<tr>
+						<th>描述</th>
+						<th id="Book_Dc"></th>
+					</tr>
+					<tr>
+						<th>价格</th>
+						<th id="Book_Price"></th>
+					</tr>
+					<tr>
+						<th>租借计费</th>
+						<th id="Book_RentMoney"></th>
+					</tr>
+					<tr>
+						<th>租借押金</th>
+						<th id="Book_deposit"></th>
+					</tr>
+					<tr>
+						<th>可租借书籍数量</th>
+						<th id="Book_RentNum"></th>
+					</tr>
+					<tr>
+						<th>可购买书籍数量</th>
+						<th id="Book_BuyNum"></th>
+					</tr>
+				</table>
+			</div>
+			<div class="operate">
+				<div class="firstdiv">
+					<li><lable>数量</lable></li>
+					<li><input id="num" type="number" min="0" max="10" step="1" value="1" class="numinput"></li>
+				</div>
+				<div class="firstdiv">
+					<button id="rent" class="booksearch">租借</button>
+					<button id="buy" class="booksearch">购买</button>
+					<button id="add" class="booksearch">加入购物车</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/selected.js"></script>
+</body>
+</html>

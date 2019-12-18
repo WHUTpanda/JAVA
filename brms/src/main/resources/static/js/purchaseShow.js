@@ -1,4 +1,8 @@
 queryPurchase()
+var select = document.querySelector('select');
+select.onchange = function(){
+	window.location=this.value;
+}
 function showRentRecord(data) {
     $("#purchaseRecord tr:not(:first)").empty("");//清空除标题外的表格
     if(data[0]!=null) {
@@ -17,9 +21,9 @@ function showRentRecord(data) {
 
 }
 function  queryPurchase() {
-    var username = window.sessionStorage.getItem("username")
+    var username = JSON.parse(window.sessionStorage.getItem("curUser")).user_ID
     $.ajax({
-        url: "/book/queryPurchase",
+        url: "/record/purchase",
         type: "POST",
         data: "User_ID=" + username,
         success: function (data) {

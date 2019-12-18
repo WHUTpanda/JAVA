@@ -21,13 +21,16 @@ public class UserService {
      参数：用户名,密码
      返回值：1没有该用户；2登陆成功；3密码错误
      */
-    public int Login(String id,String password){
+    public Object Login(String id,String password){
 
         Users user=userMapper.queryUserById(id);
         if(user==null)//没有该用户
             return 1;
         else if(user.getUser_Password().equals(password))
-            return 2;//登陆成功
+        {
+            user.setUser_Password(null);
+            return user;//登陆成功
+        }
         else
             return 3;//密码错误
     }
@@ -56,7 +59,9 @@ public class UserService {
      参数：用户名
      返回值：Users*/
     public Users getUserById(String User_ID){
-        return userMapper.queryUserById(User_ID);
+        Users users=userMapper.queryUserById(User_ID);
+        users.setUser_Password(null);
+        return users;
     }
     /**方法名：UpgradeMember
     功能：将普通用户升级为会员
@@ -75,7 +80,7 @@ public class UserService {
     {
         try{
             userMapper.recharge(amount, userId);
-            return false;
+            return true;
         }catch (Exception e)
         {
             return false;

@@ -33,7 +33,7 @@ h1{/*设置h1 的宽度*/
   	padding-bottom: 0.3125vw;/*设置元素的下内边距*/
 	padding-left: 1vw;
 	padding-right: 1vw;
-	margin-left: 45vw;
+	margin-left: 40vw;
 	margin-right: 0vw;
 	margin-top: 1.5vw;
 	display: block;/**/
@@ -44,7 +44,6 @@ li{/*使li横向排列*/
 }
 li.navigetionlist{/*设置导航字体*/
 	margin: 0  0 0 4vw;
-	font-size: 1.8vw;/*设置字体大小*/
     font-family: 'Roboto', sans-serif;/*设置字体类型*/
 	color: #fff;
     font-weight: 400;
@@ -122,3 +121,30 @@ h3{
 
 }
      
+
+select {
+	display: inline-block;
+	width:13vw;
+	background: rgba(255,255,255,0);
+	height: 2vw;
+	color: #fff;
+	border: none;
+	font-size: 1.5vw;
+	
+}
+
+option {
+	background:rgba(0,0,0,0.5);
+}
+
+.selected {
+	background:rgba(11,157,122,0.5);
+}
+
+.atype:hover{
+	color: #cc2105;
+}
+.atype{
+	color: #fff;
+	text-decoration: none;
+}

@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人信息</title>
+	<link href="css/main-style.css" rel="stylesheet" type="text/css">
+	<link href="css/info.css" rel="stylesheet" type="text/css">
+	<script src="js/jQuery.js"></script>
+</head>
+
+<body>
+	<div class="header">
+			<nav class="navbar">
+                <h1><a class="title" href="index.html">图书租售系统<span>Book rental system</span></a></h1>
+				<div class="Navigation">
+					<ul>
+						<li class="navigetionlist"><a href="main.html"  class="atype">首页</a></li>
+						<li class="navigetionlist"><a href="book-show.html" class="atype">书籍总览</a></li>
+						<li class="navigetionlist"><a href="shopping.html" class="atype">购物车</a></li>
+						<li class="navigetionlist">
+							<select class="selected">
+								<option value="Info.html" selected>查看个人信息</option>
+								<option value="rent-show.html">租书记录</option>
+								<option value="purchase-show.html">购书记录</option>
+							</select>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		<div class="container">
+			<ul class="top">
+				<h3>用户个人信息</h3>
+			</ul>
+			<table class="infotable">
+				<tr>
+					<th class="firstth">用户名</th>
+					<th id="User_ID" class="secondth"></th>
+				</tr>
+				<tr>
+					<th class="firstth">用户姓名</th>
+					<th id="userName" class="secondth"></th>
+				</tr>
+				<tr>
+					<th class="firstth">状态</th>
+					<th id="User_Status" class="secondth"></th>
+				</tr>
+				<tr>
+					<th class="firstth">电话号码</th>
+					<th id="phoneNum" class="secondth"></th>
+				</tr>
+				<tr>
+					<th class="firstth">余额</th>
+					<th id="User_Balance" class="secondth"></th>
+				</tr>
+			</table>
+			<div class="change">
+				<button id="recharge" class="charge">去充值</button>
+				<button id="vip" class="charge">升级为会员</button>
+			</div>
+			
+		</div>
+		<script src="js/info.js"></script>
+	</div>
+</body>
+</html>

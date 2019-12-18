@@ -1,11 +1,11 @@
 package whut.brms.Service;
 
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import whut.brms.Mapper.*;
 import whut.brms.entity.Book;
-import whut.brms.entity.ModelBook;
 import whut.brms.entity.Purchase;
 import whut.brms.entity.Rent;
 
@@ -18,9 +18,6 @@ public class BookService {
     BookMapper bookMapper;
 
     @Autowired(required = false)
-    ModelBookMapper modelBookMapper;
-
-    @Autowired(required = false)
     RentMapper rentMapper;
 
     @Autowired(required = false)
@@ -28,70 +25,17 @@ public class BookService {
 
     @Autowired
     UserService userService;
+
     //方法名：showAll
-    //功能：显示所有在库的书籍的模板书
+    //功能：显示所有在库的书籍
     //参数：无
-    //返回值：List<ModelBook>
-    public List<ModelBook> showAll()
-    {
-        try{
-           List<ModelBook> modelBooks= modelBookMapper.queryAll();
-           for(ModelBook modelBook:modelBooks){
-               List<Book> books=bookMapper.queryBooksByModelbookId(modelBook.getModelBook_ID());
-                for(Book book:books){
-                    if(book.getBook_Status()==1||book.getBook_Status()==3)
-                        modelBook.setCanRentNum();
-                    if(book.getBook_Status()==2||book.getBook_Status()==3)
-                        modelBook.setCanBuyNum();
-                }
-           }
-           return modelBooks;
-        }catch (Exception e)
-        {
-            System.out.println("数据库出错");
+    //返回值：List<Book>
+    public List<Book> showAll() {
+        try {
+            return bookMapper.showAll();
+        } catch (Exception e) {
             return null;
         }
-    }
-
-    //方法名：SearchByName_Rent
-    //功能：在租借区按照书名查找
-    //参数：String类型：Book_Name
-    //返回值：List<ModelBook>
-    public List<ModelBook> SearchByName_Rent(String Book_Name)  {
-        try {
-            Book_Name = "%" + Book_Name + "%";
-            return modelBookMapper.queryRentModelBookByInput(Book_Name);
-        }
-        catch (Exception e)
-        {
-            System.out.println("数据库出错");
-        }
-        return null;
-    }
-
-    //方法名：SearchByName_Purchase
-    //功能：在购买区按照书名查找
-    //参数：String类型：Book_Name
-    //返回值：List<ModelBook>
-    public List<ModelBook> SearchByName_Purchase(String Book_Name) {
-        Book_Name='%'+Book_Name+'%';
-        return modelBookMapper.queryPurchaseModelBookByInput(Book_Name);
-    }
-
-    //方法名：ShowAllRent
-    //功能：显示所有待租书
-    //参数：无
-    //返回值：List<ModelBook>
-    public List<ModelBook> ShowAllRent() {
-        return modelBookMapper.queryAllRent();
-    }
-
-    //方法名：ShowAllPurchase
-    //功能：显示所有待售书
-    //参数：无
-    //返回值：List<ModelBook>
-    public List<ModelBook> ShowAllPurchase() {
-        return modelBookMapper.queryAllPurchase();
     }
 
     //方法名：RentBook
@@ -99,58 +43,60 @@ public class BookService {
     //参数：用户名，模板书编号
     //返回值：1成功，2失败，3余额不足
     @Transactional
-    public String RentBook(String User_ID, String ModelBook_ID) {
-        List<Book> books=bookMapper.queryBooksByModelbookId(ModelBook_ID);
-        float price=modelBookMapper.queryModelBookById(ModelBook_ID).getBook_Price();
-        for(Book book:books)
-        {
-            if(book.getBook_Status()==1||book.getBook_Status()==3)
-            {
-                if(userService.pay(User_ID,price)==2)//支付押金
+    public String RentBook(String User_ID, String Book_ID,int num) {
+        try {
+            Book book = bookMapper.queryBookById(Book_ID);
+            float price = num * book.getBook_Price();
+            if (book.getNum() >= num) {
+                //未解决的bug，不支持pay函数回滚
+                if (userService.pay(User_ID, price) == 2)//支付押金
                     return "3";//余额不足
-                bookMapper.updateBookStatus(4,book.getBook_ID());
-                Date date=new Date(System.currentTimeMillis());
+                Date date = new Date(System.currentTimeMillis());
                 //设置为请求状态
-                String id=String.valueOf(System.currentTimeMillis());
-                rentMapper.insertRent(id,User_ID,book.getBook_ID(),date,1);
+                String id = String.valueOf(System.currentTimeMillis());
+                rentMapper.insertRent(id, User_ID, book.getBook_ID(), date, 1, num);//添加记录
+                bookMapper.subBook(num, book.getBook_ID());
                 return id;
             }
-        }
-        return "2";
-    }
-
-    //方法名：PurchaseBook
-    //功能：买书
-    //参数：用户名，模板书编号,价格
-    //返回值：void
-    @Transactional
-    public void PurchaseBook(String User_ID, String ModelBook_ID)  {
-        List<Book> books=bookMapper.queryBooksByModelbookId(ModelBook_ID);
-        for(Book book:books)
-        {
-            if(book.getBook_Status()==2||book.getBook_Status()==3)
-            {
-                bookMapper.updateBookStatus(5,book.getBook_ID());
-                Date date=new Date(System.currentTimeMillis());
-                purchaseMapper.insertPurchase(book.getBook_ID(),User_ID,date,String.valueOf(System.currentTimeMillis()),1);
-                break;
-            }
+            return "4";
+        } catch (Exception e) {
+            return "2";
         }
     }
 
-    //方法名：ReturnBook
-    //功能：归还书籍,被借出去的书籍
-    //参数：String类型：书编号Book_ID;String类型：用户编号User_ID
-    //返回值：boolean类型：成功为true，失败为false
-    @Transactional
-    public void ReturnBook(String Rent_ID){
-        Rent rent=rentMapper.queryRentById(Rent_ID);
-        String book_id=rent.getBook_ID();
-        bookMapper.updateBookStatus(1,book_id);
-        Date date=new Date(System.currentTimeMillis());
-        rentMapper.updateRentDate(date,Rent_ID);
-    }
-
+//
+//    //方法名：PurchaseBook
+//    //功能：买书
+//    //参数：用户名，模板书编号,价格
+//    //返回值：void
+//    @Transactional
+//    public void PurchaseBook(String User_ID, String ModelBook_ID)  {
+//        List<Book> books=bookMapper.queryBooksByModelbookId(ModelBook_ID);
+//        for(Book book:books)
+//        {
+//            if(book.getBook_Status()==2||book.getBook_Status()==3)
+//            {
+//                bookMapper.updateBookStatus(5,book.getBook_ID());
+//                Date date=new Date(System.currentTimeMillis());
+//                purchaseMapper.insertPurchase(book.getBook_ID(),User_ID,date,String.valueOf(System.currentTimeMillis()),1);
+//                break;
+//            }
+//        }
+//    }
+//
+//    //方法名：ReturnBook
+//    //功能：归还书籍,被借出去的书籍
+//    //参数：String类型：书编号Book_ID;String类型：用户编号User_ID
+//    //返回值：boolean类型：成功为true，失败为false
+//    @Transactional
+//    public void ReturnBook(String Rent_ID){
+//        Rent rent=rentMapper.queryRentById(Rent_ID);
+//        String book_id=rent.getBook_ID();
+//        bookMapper.updateBookStatus(1,book_id);
+//        Date date=new Date(System.currentTimeMillis());
+//        rentMapper.updateRentDate(date,Rent_ID);
+//    }
+//
     //方法名：Book
     //功能：通过Book_ID 查询书籍
     //参数：String类型：书编号Book_ID
@@ -159,73 +105,14 @@ public class BookService {
         return bookMapper.queryBookById(Book_ID);
     }
 
-    //方法名：QueryRentRecord
-    //功能：查询当前用户借书记录
-    //参数：String类型：用户名User_ID
-    //返回值：List<Rent>：记录
-    public List<Rent> QueryRentRecord(String User_ID) {
-        List<Rent> rc = rentMapper.queryRentByUserId(User_ID);
-        for (Rent rent:rc) {
-            String Book_ID = rent.getBook_ID();
-            String ModelBook_ID =bookMapper.queryBookById(Book_ID).getModelBook_ID();
-            ModelBook modelBook = modelBookMapper.queryModelBookById(ModelBook_ID);
-            String book_name = modelBook.getBook_Name();
-            rent.setBook_name(book_name);
-        }
-        return rc;
-    }
-
-    //方法名：QueryPurchaseRecord
-    //功能：查询当前用户借书记录
-    //参数：String类型：用户名User_ID
-    //返回值：List<Purchase>：记录
-    public List<Purchase> QueryPurchaseRecord(String User_ID)  {
-        List<Purchase> rc = purchaseMapper.queryPurchaseByUserId(User_ID);
-        for (Purchase purchase:rc) {
-            String Book_ID = purchase.getBook_ID();
-            String ModelBook_ID = bookMapper.queryBookById(Book_ID).getModelBook_ID();
-            ModelBook modelBook = modelBookMapper.queryModelBookById(ModelBook_ID);
-            String book_name = modelBook.getBook_Name();
-            float book_Price = modelBook.getBook_Price();
-            purchase.setBook_name(book_name);
-            purchase.setBook_price(book_Price);
-        }
-        return rc;
-    }
-
-    //方法名：SearchByModelBookID
-    //功能：通过模板书ID查找
-    //参数：String类型：ModelBook_ID
-    //返回值：ModelBook
-    public ModelBook SearchByModelBookID(String ModelBook_ID)  {
-        return modelBookMapper.queryModelBookById(ModelBook_ID);
-    }
-
-    //方法名：SearchBookByModelBookID
-    //功能：通过模板书ID查找个体书
-    //参数：String类型：ModelBook_ID
-    //返回值：list<Book>
-    public List<Book> SearchBookByModelBookID(String ModelBook_ID){
-        return bookMapper.queryBooksByModelbookId(ModelBook_ID);
-    }
     //通过输入查找模板书
-    public List<ModelBook> SearchByInput(String input) {
+    public List<Book> SearchByInput(String input) {
         try {
             input="%"+input+"%";
-            List<ModelBook> modelBooks=modelBookMapper.queryModelBookByInput(input);
-            for(ModelBook modelBook:modelBooks) {
-                List<Book> books = bookMapper.queryBooksByModelbookId(modelBook.getModelBook_ID());
-                for (Book book : books) {
-                    if (book.getBook_Status() == 1 || book.getBook_Status() == 3)
-                        modelBook.setCanRentNum();
-                    if (book.getBook_Status() == 2 || book.getBook_Status() == 3)
-                            modelBook.setCanBuyNum();
-                }
-            }
-            return modelBooks;
+            return bookMapper.searchByInput(input);
         }catch(Exception e){
-            System.out.println("访问数据库出错");
+            return null;
         }
-        return null;
+
     }
 }

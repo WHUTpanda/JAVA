@@ -1,3 +1,8 @@
+var select = document.querySelector('select');
+select.onchange = function(){
+	window.location=this.value;
+}
+
 if(window.sessionStorage.getItem("searchInput")!=null)
 {
     var input=window.sessionStorage.getItem("searchInput")
@@ -15,25 +20,6 @@ if(window.sessionStorage.getItem("searchInput")!=null)
 else {
     showAll()
 }
-
-//显示用户身份
-var u=window.sessionStorage.getItem('username');
-var status=0
-$.ajax({
-    url:"/user/getUser",
-    type:'POST',
-    data:'User_ID='+u,
-    success:function (data) {
-        $("#username").text ("用户名: "+data.user_ID);
-        status=data.user_Status
-        if(status==1)
-            $("#userstatus").text("用户身份: 普通用户");
-        else if(status==2)
-            $("#userstatus").text("用户身份: 会员");
-        else if(status==3)
-            $("#userstatus").text("用户身份: 管理员");
-    }
-});
 
 //显示全部书籍
 function showAll(){
@@ -58,20 +44,7 @@ function purchase(modelBookId,userId) {
         }
     })
 }
-//租借书籍函数
-function rent(modelBookId,userId) {
-    $.ajax({
-        url:"/book/rent",
-        type:"POST",
-        data:"User_ID="+userId+"&ModelBook_ID="+modelBookId,
-        success:function (data) {
-            if(data)
-                alert("租借成功！")
-            else
-                alert("租借失败")
-        }
-    })
-}
+
 //显示书籍
 function show(data) {
     $("#bookTable").empty("");
@@ -91,10 +64,11 @@ function show(data) {
                 //给可租借的书籍设置响应按钮
                 for (var i = 0; i < data.length; i++) {
                     (function (i) {
-                        if(data[i].canRent&&status!=1)
+                        if(data[i].num>0)
                         {
                             $("#rentBtn" + i).click(function () {
-                                rent(data[i].modelBook_ID, u);
+                                location.href="selected.html"
+                                window.sessionStorage.setItem("Book_ID",data[i].book_ID)
                                 showAll()
                             })
                         }
@@ -108,7 +82,7 @@ function show(data) {
                 //给可购买的书籍设置响应按钮
                     for (var i = 0; i < data.length; i++) {
                         (function (i) {
-                            if(data[i].canBuy)
+                            if(data[i].num>0)
                             {
                                 $("#purchaseBtn" + i).click(function () {
                                     purchase(data[i].modelBook_ID, u);

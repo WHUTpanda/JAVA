@@ -1,4 +1,8 @@
 queryRent()
+var select = document.querySelector('select');
+select.onchange = function(){
+	window.location=this.value;
+}
 function returnBook(Rent_ID) {
     $.ajax({
         url:"/book/returnBook",
@@ -51,9 +55,9 @@ function showRentRecord(data) {
 
 }
 function  queryRent() {
-    var username = window.sessionStorage.getItem("username")
+    var username = JSON.parse(window.sessionStorage.getItem("curUser")).user_ID
     $.ajax({
-        url: "/book/queryRent",
+        url: "/record/rent",
         type: "POST",
         data: "User_ID=" + username,
         success: function (data) {

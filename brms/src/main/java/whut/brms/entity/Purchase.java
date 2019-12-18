@@ -10,6 +10,15 @@ public class Purchase {
     private float book_price;
     private Date Purchase_Date;
     private int handle;
+    private int num;
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
 
     public int getHandle() {
         return handle;

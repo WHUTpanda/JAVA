@@ -16,7 +16,8 @@ public interface CartMapper {
             @Result(column = "Add_Date",property = "addDate"),
             @Result(column = "Type",property = "type"),
             @Result(column = "Price",property = "price"),
-            @Result(column = "IsFinish",property = "isFinish")
+            @Result(column = "IsFinish",property = "isFinish"),
+            @Result(column = "Num",property = "num")
     })
     @Insert("insert into ShoppingCart (Cart_ID,Book_ID,User_ID,Add_Date,Type,Price,IsFinish)" +
             "values(#{Cart_ID},#{Book_ID},#{User_ID},#{Add_Date},#{Type},#{Price},#{IsFinish})")

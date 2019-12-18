@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+.header{
+	background: url(../images/bg1.jpg) no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+	background-size: cover;
+	min-height: 900px;
+	position: relative;
+}
+
+
+
+.shoppingtable {
+	margin: 0 10vw 0 10vw;
+	font-size: 2vw;
+	width: 80vw;
+	background: rgba(255,255,255,0.5);
+	float: left;
+	text-align: center;
+	font-size: 2vw;
+	display: inline-block;
+}
+
+.bookid {
+	width: 10vw;
+}
+
+
+.bookname {
+	width:20vw;
+}
+
+.bookwriter {
+	width: 10vw;
+}
+
+.addtime {
+	width: 10vw;
+}
+
+.bookprice {
+	width: 10vw;
+}
+
+.buybutton {
+	width: 20vw;
+}
+.booksearch {
+	font-size: 1.5vw;
+	width: 5.5vw;
+	color:aqua;
+	font-weight:800;
+	border-color:yellow;
+	font-family: 'Roboto', sans-serif;
+	border-radius:0.35vw;
+	background: #cc2105;
+	color: #fff;
+	letter-spacing: 1px;
+	border: none;
+	-webkit-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	transition: 0.5s all;
+}
+button.booksearch:hover{
+	border-radius: 0.35vw;
+	background-color: #0EBEFF;
+}
+.booksearch:hover{
+	border-radius: 0.35vw;
+	background-color: #0EBEFF;
+}

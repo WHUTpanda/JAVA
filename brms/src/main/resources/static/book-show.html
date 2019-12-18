@@ -15,23 +15,20 @@
                 <h1><a class="title" href="index.html">图书租售系统<span>Book rental system</span></a></h1>
 				<div class="Navigation">
 					<ul>
-						<li class="navigetionlist"><a href="main.html" class="atype">首页</a></li>
-						<li class="navigetionlist"><a href="rent-show.html" class="atype">租书记录</a></li>
-						<li class="navigetionlist"><a href="purchase-show.html" class="atype">购书记录</a></li>
+						<li class="navigetionlist"><a href="main.html"  class="atype">首页</a></li>
 						<li class="navigetionlist"><a href="book-show.html" style="color: antiquewhite">书籍总览</a></li>
+						<li class="navigetionlist"><a class="atype" href="shopping.html">购物车</a></li>
+						<li class="navigetionlist">
+							<select>
+								<option value="1" selected>-----个人信息-----</option>
+								<option  value="Info.html">查看个人信息</option>
+								<option value="rent-show.html">租书记录</option>
+								<option value="purchase-show.html">购书记录</option>
+							</select>
+						</li>
 					</ul>
 				</div>
 			</nav>
-		<div class="container">
-            <!-- banner-text -->
-				<div class="info">
-					<ul>
-						<li class="liinfo" id="username"></li>
-						<li class="liinfo" id="userstatus"></li>
-					</ul>
-				</div>
-  		</div>
-    <br>
 	<ol class="top">
 		<li class="text"><input type="text" id="inputText" class="texttype" placeholder="请输入需要查找的书名..."></li>
 		<li class="searchbutton"><button type="submit" id="searchBtn" class="booksearch">搜索</button></li>
@@ -44,13 +41,36 @@
 				<th class="thbooknametitle">书名</th>
 				<th class="wttitle">作者</th>
 				<th class="pctitle">价格</th>
-				<th class="dptitle">描述</th>
+				<th class="dp">描述</th>
 				<th class="thbttitle">租借</th>
 				<th class="thbttitleb">购买</th>
 			</tr>
 		</table>
 			<table id="bookTable" class="tabletype">
-
+				<tr>
+				<th class="thbooknametitle">书名和反思的回复</th>
+				<th class="wttitle">作者</th>
+				<th class="pctitle">价格</th>
+				<th class="dp">描述</th>
+				<th class="thbttitle"><button class="booksearch">租借</button></th>
+				<th class="thbttitleb"><button class="booksearch">租借</button></th>
+			</tr>
+				<tr>
+				<th class="thbooknametitle">书名上的覅说的话佛山的</th>
+				<th class="wttitle">作者</th>
+				<th class="pctitle">价格</th>
+				<th class="dp">描述</th>
+				<th class="thbttitle"><button class="booksearch">租借</button></th>
+				<th class="thbttitleb"><button class="booksearch">租借</button></th>
+			</tr>
+				<tr>
+				<th class="thbooknametitle">书名</th>
+				<th class="wttitle">作者</th>
+				<th class="pctitle">价格</th>
+				<th class="dp">描述</th>
+				<th class="thbttitle"><button class="booksearch">租借</button></th>
+				<th class="thbttitleb"><button class="booksearch">租借</button></th>
+			</tr>
 			</table>
 
 	</div>

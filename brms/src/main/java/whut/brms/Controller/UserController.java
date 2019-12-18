@@ -1,5 +1,6 @@
 package whut.brms.Controller;
 
+import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.*;
 import whut.brms.entity.Users;
 import whut.brms.Service.UserService;
@@ -20,17 +21,19 @@ public class UserController {
 
     @PostMapping(value = "/login")
     @ResponseBody
-    public int Login(@RequestParam(value = "User_ID",required = true) String User_ID,
-                     @RequestParam(value = "User_Password",required = true) String User_Password)
+    public Object Login(@RequestParam(value = "User_ID",required = true) String User_ID,
+                      @RequestParam(value = "User_Password",required = true) String User_Password)
     {
          return userService.Login(User_ID,User_Password);
     }
     @RequestMapping(value = "/Register",method = RequestMethod.POST)
     @ResponseBody
     public boolean  Register(@RequestParam(value = "User_ID",required = true) String User_ID,
-                          @RequestParam(value = "User_Password",required = true) String User_Password) {
+                            @RequestParam(value = "User_Password",required = true) String User_Password,
+                             @RequestParam(value = "pn",required = true) String pn,
+                             @RequestParam(value = "name",required = true) String name) {
         try {
-            boolean rt=userService.RegisterUser(User_ID, User_Password);
+            boolean rt=userService.RegisterUser(User_ID, User_Password,pn,name);
             return rt;
         }catch (Exception e)
         {
