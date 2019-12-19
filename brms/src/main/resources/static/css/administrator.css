@@ -7,7 +7,7 @@
 	-o-background-size: cover;
 	-ms-background-size: cover;
 	background-size: cover;
-	min-height: 900px;
+	min-height: 700px;
 	position: relative;
 }
 .systitle {
@@ -26,7 +26,7 @@ span {
 
 .showplace {
 	width: 80vw;
-	margin: 5vw 0 0 5vw;
+	margin: 1vw 0 0 5vw;
 }
 
 .showtable {
@@ -38,7 +38,6 @@ span {
 .top {
 	display: -webkit-box;
 	display: -ms-flexbox;
-	
 	-ms-flex-wrap: wrap;
 	flex-wrap: wrap;
 	padding: 0.75rem 1rem;
@@ -46,6 +45,7 @@ span {
 	list-style: none;
 	background: rgba(255,255,255,0.5);
 	border-radius: 0.25rem;
+	height: 3vw;
 }
 
 .text {
@@ -62,6 +62,7 @@ span {
 	width: 5.5vw;
 	color:aqua;
 	font-weight:800;
+	margin: 0 0 0 9vw;
 	border-color:yellow;
 	font-family: 'Roboto', sans-serif;
 	border-radius:0.35vw;
@@ -85,4 +86,32 @@ button.booksearch:hover{
 }
 .searchbutton {
 	margin: 0 0 0 4vw;
+}
+
+li {
+	margin: 0 0 0 4vw;
+}
+label {
+	padding: 0vw ;
+	margin: 1vw 5vw 1vw 5vw;
+	font-size: 3vw;
+}
+
+.labletype {
+	font-size: 2vw;
+	color: #fff;
+	margin:2vw;
+}
+
+.texttype {
+	margin: 1vw 2vw;
+	height: 2vw;
+	font-size:2vw;
+	width: 25vw;
+}
+#dealplace{
+	display: block;
+}
+#charge{
+	display: none;
 }

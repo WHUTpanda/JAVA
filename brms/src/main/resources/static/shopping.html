@@ -35,21 +35,24 @@
 					<th class="bookname">书名</th>
 					<th class="bookwriter">作者</th>
 					<th class="addtime">添加时间</th>
-					<th class="bookprice">价格</th>
-					<th class="buybutton">购买</th>
-				</tr>
-				<tr>
-					<th class="bookid">书编号</th>
-					<th class="bookname">书名</th>
-					<th class="bookwriter">作者</th>
-					<th class="addtime">添加时间</th>
-					<th class="bookprice">价格</th>
-					<th class="buybutton"><button class="booksearch">购买</button></th>
+					<th class="bookprice">单本价格</th>
+					<th class="bookprice">数量</th>
+					<th class="bookprice">合计价格</th>
+					<th class="buybutton">选择</th>
 				</tr>
 			</table>
 			<table class="shoppingtable" id="shopping"></table>
-			<script src="js/shopping.js"></script>
+			<div class="sum">
+				<li id="selectednum"></li>
+				<li id="selectedsum"></li>
+			</div>
+			<div class="bt">
+				<li><button class="booksearch" id="rent">租借</button></li>
+				<li><button class="booksearch" id="buy">购买</button></li>
+				<li><button class="booksearch" id="delete">删除</button></li>
+			</div>
 		</div>
 	</div>
+	<script src="js/shopping.js"></script>
 </body>
 </html>

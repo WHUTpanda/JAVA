@@ -12,6 +12,7 @@ import whut.brms.entity.Purchase;
 import whut.brms.entity.Rent;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,7 +23,8 @@ public class ManagerService {
     PurchaseMapper purchaseMapper;
     @Autowired
     BookMapper bookMapper;
-
+    @Autowired
+    BookService bookService;
     public List<Manager> showAll()
     {
         List<Rent> rents=rentMapper.queryRequesting();
@@ -61,21 +63,39 @@ public class ManagerService {
     /**
      * 点击确定之后
      * @param Id
-     * @param type
+     * @param handle
      */
     @Transactional
-    public void define(String Id,int type)
-    {
-        if(type==1)
-        {
-            rentMapper.done(Id);
+    public boolean define(String Id,int handle,int num) {
+        try {
+            if (handle == 1)//租借请求
+            {
+                rentMapper.done(Id);
+            } else if (handle == 2) {//购买请求
+                purchaseMapper.done(Id);
+            } else {//归还请求
+                Rent rent = rentMapper.queryRentById(Id);
+                Date date = new Date(System.currentTimeMillis());
+                if (rent.getNum() == num) {
+                    if(bookService.payRent(Id)) {
+                        bookMapper.addBook(num, rent.getBook_ID());//库中添加书籍
+                        rentMapper.updateRentDate(date, Id);//更新归还书籍
+                    }
+                } else if (rent.getNum() > num && num > 0) {
+                    if(bookService.payRent(Id)) {
+                        bookMapper.addBook(num, rent.getBook_ID());//库中添加书籍
+                        rentMapper.subRentNum(num, Id);//减少记录中的数目
+                        rentMapper.insertRent(String.valueOf(System.currentTimeMillis()),
+                        rent.getUser_ID(), rent.getBook_ID(), rent.getRent_Date(),
+                                0, num);//生成新的记录
+                    }
+                }
+                rentMapper.done(Id);
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-        else if(type==2){
-            purchaseMapper.done(Id);
-        }
-        else {
-            rentMapper.done(Id);
-        }
-    }
 
+    }
 }

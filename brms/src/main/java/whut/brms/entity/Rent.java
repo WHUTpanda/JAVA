@@ -1,6 +1,7 @@
 package whut.brms.entity;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 public class Rent {
     private String User_ID;

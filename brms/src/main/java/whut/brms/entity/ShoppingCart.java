@@ -9,9 +9,7 @@ public class ShoppingCart {
     private String bookId;
     private String bookName;
     private Date addDate;
-    private boolean type;
     private float price;
-    private boolean isFinish;
     private int num;
 
     public int getNum() {
@@ -37,30 +35,12 @@ public class ShoppingCart {
         this.bookName = bookName;
     }
 
-    public boolean isFinish() {
-        return isFinish;
-    }
 
-    public void setFinish(boolean finish) {
-        isFinish = finish;
-    }
 
     public String getCartId() {
         return cartId;
     }
 
-    @Override
-    public String toString() {
-        return "ShoppingCart{" +
-                "cartId='" + cartId + '\'' +
-                ", userId='" + userId + '\'' +
-                ", bookId='" + bookId + '\'' +
-                ", addDate=" + addDate +
-                ", type=" + type +
-                ", price=" + price +
-                ", isFinsh=" + isFinish +
-                '}';
-    }
 
     public void setCartId(String cartId) {
         this.cartId = cartId;
@@ -90,14 +70,6 @@ public class ShoppingCart {
         this.addDate = addDate;
     }
 
-    public boolean isType() {
-        return type;
-    }
-
-    public void setType(boolean type) {
-        this.type = type;
-    }
-
     public float getPrice() {
         return price;
     }
@@ -106,11 +78,4 @@ public class ShoppingCart {
         this.price = price;
     }
 
-    public boolean isFinsh() {
-        return isFinish;
-    }
-
-    public void setFinsh(boolean finsh) {
-        isFinish = finsh;
-    }
 }

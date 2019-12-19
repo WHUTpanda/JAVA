@@ -2,10 +2,9 @@ package whut.brms.entity;
 
 public class Manager {
     private String id;
-    private int  type;//1为租借中，2为购买，3为归还
     private String bookName;
     private String bookId;
-    private int handle;
+    private int handle;//1为租借中，2为购买，3为归还
     private int num;
     private String userId;
 
@@ -34,13 +33,6 @@ public class Manager {
         this.num = num;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
 
     public String getBookName() {
         return bookName;

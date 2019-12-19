@@ -23,10 +23,9 @@ public class CartController  {
     @ResponseBody
     public boolean addCart(@RequestParam(value = "User_ID",required = true) String userId,
                            @RequestParam(value = "Book_ID",required = true) String bookId,
-                           @RequestParam(value = "Type",required = true) boolean type,
-                           @RequestParam(value = "Price",required = true) float price)
+                           @RequestParam(value = "num",required = true) int num)
     {
-        return cartService.addCart(userId,bookId,type, price);
+        return cartService.addCart(userId,bookId,num);
     }
 
     @PostMapping("/remove")

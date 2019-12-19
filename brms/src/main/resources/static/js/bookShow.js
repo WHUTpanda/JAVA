@@ -50,51 +50,18 @@ function show(data) {
     $("#bookTable").empty("");
             if (data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    var tr = $("<tr><th class=\"thbooknametitle\" >" + data[i].book_Name +
+                    var tr = $("<tr onclick=toID("+data[i].book_ID+") id='row'"+i+"><th class=\"thbooknametitle\" >" + data[i].book_Name +
                         "</th><th class=\"wttitle\">" + data[i].book_Writer +
                         "</th><th class=\"pctitle\">" + data[i].book_Price +
                         "</th><th class=\"dp\">" + data[i].book_description +
-                        "</th><th class=\"thbttitle\">" +
-                        "<button class=\"booksearch\" id=" + "rentBtn" + i + ">租 借</button></th>" +
-                        "</th><th>" +
-                        "<button class=\"booksearch\" id=" + "purchaseBtn" + i + ">购 买</button></th>" +
-                        "</tr>");
+                        "</th><tr>");
                     $("#bookTable").append(tr)
                 }
-                //给可租借的书籍设置响应按钮
-                for (var i = 0; i < data.length; i++) {
-                    (function (i) {
-                        if(data[i].num>0)
-                        {
-                            $("#rentBtn" + i).click(function () {
-                                location.href="selected.html"
-                                window.sessionStorage.setItem("Book_ID",data[i].book_ID)
-                                showAll()
-                            })
-                        }
-                        else
-                        {
-                            $("#rentBtn" + i).css({'background-color' : 'gray'});
-                            $("#rentBtn" + i).attr("disabled", true);
-                        }
-                    })(i);
-                }
-                //给可购买的书籍设置响应按钮
-                    for (var i = 0; i < data.length; i++) {
-                        (function (i) {
-                            if(data[i].num>0)
-                            {
-                                $("#purchaseBtn" + i).click(function () {
-                                    purchase(data[i].modelBook_ID, u);
-                                    showAll()
-                                })
-                            }
-                            else {
-
-                                    $("#purchaseBtn" + i).css({'background-color' : 'gray'});
-                                    $("#purchaseBtn" + i).attr("disabled", true);
-                            }
-                        })(i);
+                for(var i=0;i<data.length;i++){
+                    $("row"+i).onclick(function () {
+                        window.sessionStorage.setItem("Book_ID",data[i].book_id);
+                        location.href="selected.html"
+                    })
                 }
             }
             else {
@@ -102,7 +69,10 @@ function show(data) {
                 $("#bookTable").append(tr);
             }
 }
-
+function toID(dataID) {
+    window.sessionStorage.setItem("Book_ID",dataID);
+    location.href="selected.html"
+}
 //点击搜索按钮
 $("#searchBtn").click(function rentx() {
     $("#bookTable").empty("");//清空除标题外的表格

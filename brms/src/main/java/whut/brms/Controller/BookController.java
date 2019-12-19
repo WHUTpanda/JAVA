@@ -34,20 +34,20 @@ public class BookController {
             return null;
         }
     }
-//    //买书
-//    @PostMapping("/purchase")
-//    @ResponseBody
-//    boolean purchase(@RequestParam(value = "User_ID",required = true) String User_ID,
-//    @RequestParam(value = "ModelBook_ID",required = true) String ModelBook_ID)
-//    {
-//        try{
-//            bookService.PurchaseBook(User_ID,ModelBook_ID);
-//            return true;
-//        }
-//        catch (Exception e){
-//            return false;
-//        }
-//    }
+    //买书
+    @PostMapping("/purchase")
+    @ResponseBody
+    String purchase(@RequestParam(value = "User_ID",required = true) String User_ID,
+    @RequestParam(value = "Book_ID",required = true) String ModelBook_ID,
+    @RequestParam(value = "num",required = true) int num)
+    {
+        try{
+            return bookService.PurchaseBook(User_ID,ModelBook_ID,num);
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
 //    //还书
 //    @PostMapping("/returnBook")
 //    @ResponseBody

@@ -23,10 +23,11 @@ public class ManagerController {
     @PostMapping("/define")
     @ResponseBody
     public boolean define(@RequestParam(value = "id",required = true)String Id,
-                          @RequestParam(value = "type",required = true) int type)
+                          @RequestParam(value = "handle",required = true) int handle,
+                          @RequestParam(value = "num",required = true) int num)
     {
         try{
-            managerService.define(Id,type);
+            managerService.define(Id,handle,num);
         return true;
         }catch (Exception e)
         {

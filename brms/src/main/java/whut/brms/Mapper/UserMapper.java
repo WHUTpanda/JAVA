@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
     //Users queryUserById(String User_ID);
-    @Results({
+    @Results(id = "userMap" ,value = {
             @Result(id=true ,property = "User_ID", column = "User_ID"),
             @Result(property = "User_Password", column = "User_Password"),
             @Result(property = "User_Status", column = "User_Status"),
@@ -29,6 +29,7 @@ public interface UserMapper {
     void updateUser_Status(String User_ID);
  @Update("update Users set User_Balance=User_Balance+#{amount} where User_ID=#{userId}")
     void recharge(float amount,String userId);
+
     @Update("update Users set User_Balance=User_Balance-#{price} where User_ID=#{userId}")
     void pay(String userId,float price);
 }

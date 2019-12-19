@@ -3,7 +3,9 @@ package whut.brms.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import whut.brms.Mapper.BookMapper;
 import whut.brms.Mapper.CartMapper;
+import whut.brms.entity.Book;
 import whut.brms.entity.ShoppingCart;
 
 import java.util.Date;
@@ -16,15 +18,17 @@ public class CartService {
     CartMapper cartMapper;
     @Autowired
     BookService bookService;
+    @Autowired
+    BookMapper bookMapper;
     /**
      * 添加购物车
      */
     @Transactional
-    public boolean addCart(String userId,String bookId,boolean type, float price)
+    public boolean addCart(String userId,String bookId,int num)
     {
         try{
             Date date=new Date(System.currentTimeMillis());
-            cartMapper.insertCart(String.valueOf(System.currentTimeMillis()),bookId,userId,date,type,price,false);
+            cartMapper.insertCart(String.valueOf(System.currentTimeMillis()),bookId,userId,date,num);
             return  true;
         }catch (Exception e)
         {
@@ -51,7 +55,14 @@ public class CartService {
     public List<ShoppingCart> queryCart(String userId)
     {
         try {
-         return cartMapper.queryUserCart(userId);
+            List<ShoppingCart> shoppingCarts=cartMapper.queryUserCart(userId);
+            for(ShoppingCart shoppingCart:shoppingCarts){
+                Book book=bookMapper.queryBookById(shoppingCart.getBookId());
+                shoppingCart.setBookName(book.getBook_Name());
+                shoppingCart.setBookWriter(book.getBook_Writer());
+                shoppingCart.setPrice(book.getBook_Price());
+            }
+            return shoppingCarts;
         }catch (Exception e)
         {
             return null;

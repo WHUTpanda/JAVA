@@ -32,7 +32,10 @@ public interface RentMapper {
     void updateRentDate(Date Return_Date,String Rent_ID);
     @Select("select * from Rent where Handle= 1 or Handle=2")
     List<Rent> queryRequesting();
-
+    @Update("update Rent set Num=Num-#{num} where Rent_ID=#{rentId}")
+    void subRentNum(int num,String rentId);
+    @Update("update Rent set Handle = 2 where Rent_ID=#{rentId}")
+    void handleReturn(String rentId);
     /**
      * 设置完成请求
      * @param rentId

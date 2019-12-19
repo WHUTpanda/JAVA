@@ -1,24 +1,27 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>管理员界面</title>
-<link href="css/administrator.css" rel="stylesheet" type="text/css">
+	<meta charset="utf-8">
+	<title>管理员界面</title>
+	<link href="css/administrator.css" rel="stylesheet" type="text/css">
 	<script src="js/jQuery.js"></script>
+
 </head>
 
 <body>
-	<div class="header">
-		<nav class="systitle">
-			<h2><a href="index.html" class="atype">图书租售系统管理员界面</a><span>Book rental system</span></h2>
-		</nav>
-		<ol class="top">
-			<li class="text"><input type="text" id="inputText" class="texttype" placeholder="请输入需要查找的号码..."></li>
-			<li class="searchbutton"><button type="submit" id="searchBtn" class="booksearch">搜索</button></li>
-   		</ol>
-		
-		<div class="showplace">
-			<table  class="showtable">
+<div class="header">
+	<nav class="systitle">
+		<h2><a href="index.html" class="atype">图书租售系统管理员界面</a><span>Book rental system</span></h2>
+	</nav>
+	<ol class="top">
+		<li id="bookdeal" style="padding: 1vw; color:#DB1013;" onclick=clickit(2)>租书售书处理</li>
+		<li id="moneydeal" style="padding: 1vw;" onclick=clickit(1)>充值支付处理</li>
+		<button id="new" class="booksearch">刷新</button>
+	</ol>
+
+	<div class="showplace">
+		<div id="dealplace">
+			<table class="showtable" id="tableup">
 				<tr>
 					<th>查询号码</th>
 					<th>用户名</th>
@@ -28,11 +31,26 @@
 					<th>操作按钮</th>
 				</tr>
 			</table>
-			<table id="OrderList" class="showtable">
-
-			</table>
+			<table class="showtable" id="OrderList"></table>
 		</div>
+
+		<div id="charge">
+			<li>
+				<label class="labletype">用户名</label>
+			</li><br>
+			<li>
+				<input type="text" name="User_ID" id="name" placeholder="请输入用户名" class="texttype" >
+			</li>
+			<li>
+				<label class="labletype">充值金额</label>
+			</li><br>
+			<li>
+				<input type="text" name="User_Name" id="money" placeholder="请输入充值金额" class="texttype" >
+			</li><br>
+			<li><button class="booksearch" id="addmoney">充值</button></li>
+		</div>
+		<script src="js/administrator.js"></script>
 	</div>
-<script src="js/administrator.js"></script>
+</div>
 </body>
 </html>
