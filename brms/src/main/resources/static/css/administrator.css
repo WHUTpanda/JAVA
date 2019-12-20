@@ -7,7 +7,7 @@
 	-o-background-size: cover;
 	-ms-background-size: cover;
 	background-size: cover;
-	min-height: 700px;
+	min-height: 900px;
 	position: relative;
 }
 .systitle {
@@ -30,9 +30,9 @@ span {
 }
 
 .showtable {
-	width: 80vw;
+	width: 90vw;
 	background: rgba(255,255,255,0.5);
-	margin: 0 5vw 0 5vw;
+	margin: 0 5vw 0 0.5vw;
 	font-size: 2vw;
 }
 .top {
@@ -84,12 +84,39 @@ button.booksearch:hover{
 	border-radius: 0.35vw;
 	background-color: #0EBEFF;
 }
+.booksearch2 {
+	font-size: 1.5vw;
+	width: 5.5vw;
+	color:aqua;
+	font-weight:800;
+	margin: 0 0 0 0vw;
+	border-color:yellow;
+	font-family: 'Roboto', sans-serif;
+	border-radius:0.35vw;
+	background: #cc2105;
+	color: #fff;
+	letter-spacing: 1px;
+	border: none;
+	-webkit-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	transition: 0.5s all;
+}
+button.booksearch2:hover{
+	border-radius: 0.35vw;
+	background-color: #0EBEFF;
+}
+.booksearch2:hover{
+	border-radius: 0.35vw;
+	background-color: #0EBEFF;
+}
 .searchbutton {
 	margin: 0 0 0 4vw;
 }
 
 li {
-	margin: 0 0 0 4vw;
+	margin: 0vw;
 }
 label {
 	padding: 0vw ;
@@ -114,4 +141,40 @@ label {
 }
 #charge{
 	display: none;
+}
+.newdiv {
+	margin: 0.5vw 0 0 10vw;
+}
+
+.moneylable {
+	padding: 1vw;
+}
+
+.deallable {
+	padding: 1vw;
+	color:#DB1013;
+}
+
+.number {
+	width: 25vw;
+}
+
+.username {
+	width: 10vw;
+}
+
+.bookname {
+	width: 20vw;
+}
+
+.dotype {
+	width: 10vw;
+}
+
+.sum {
+	width: 5vw;
+}
+
+.dobutton {
+	width:15vw;
 }

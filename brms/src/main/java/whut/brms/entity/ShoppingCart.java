@@ -1,6 +1,6 @@
 package whut.brms.entity;
 
-import java.util.Date;
+import java.sql.Date;//使用Java.util.Date数据会有后缀T16:00:00.000+0000
 
 public class ShoppingCart {
     private String cartId;

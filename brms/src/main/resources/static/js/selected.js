@@ -36,16 +36,24 @@ $("#rent").click(
 				url: "/book/rent",
 				type: "POST",
 				data: "User_ID=" + userId + "&Book_ID=" + id + "&num=" + num,
-				success: function (data) {
-					if (data == "3")
-						alert("余额不足，请充值")
-					else if (data == "4")
-						alert("库存不足，租借失败")
-					else if (data == "2")
-						alert("租借失败")
-					else {
-						alert("租借成功！\n请凭借租书号："+data+" 前往图书馆柜台取书")
-						show()
+				success: function (response) {
+					if(response==2){
+						alert("租借失败！")
+					}
+					else if(response==3) {
+						alert("余额不足！")
+					}
+					else if(typeof response=='string'){
+						alert("取书号为："+response+"\n请前往前台领取")
+						showshopping()
+					}
+					else{
+						var data="";
+						for(var i=1;i<response.length;i++){
+							data+=response[i]
+							data+='\n'
+						}
+						alert("书籍库存不足\n不足书籍如下：\n"+data)
 					}
 
 				}
@@ -64,19 +72,26 @@ $("#buy").click(
 			$.ajax({
 				url: "/book/purchase",
 				type: "POST",
-				data: "User_ID=" + userId + "&Book_ID=" + id + "&num=" + num+"&Type="+true,
-				success: function (data) {
-					if (data == "3")
-						alert("余额不足，请充值")
-					else if (data == "4")
-						alert("库存不足，购买失败")
-					else if (data == "2")
-						alert("购买失败")
-					else {
-						alert("购买成功！\n请凭借购书号："+data+" 前往图书馆柜台取书")
-						show()
+				data: "User_ID=" + userId + "&Book_ID=" + id + "&num=" + num,
+				success: function (response) {
+					if(response==2){
+						alert("购买失败！")
 					}
-
+					else if(response==3) {
+						alert("余额不足！")
+					}
+					else if(typeof response=='string'){
+						alert("取书号为："+response+"\n请前往前台领取")
+						showshopping()
+					}
+					else{
+						var data="";
+						for(var i=1;i<response.length;i++){
+							data+=response[i]
+							data+='\n'
+						}
+						alert("书籍库存不足\n不足书籍如下：\n"+data)
+					}
 				}
 			})
 		}

@@ -8,7 +8,7 @@ function define(id,handle,num)
         type:"post",
         data:"handle="+handle+"&id="+id+"&num="+num,
         success:function (data) {
-            return data;
+            return data
         }
     })
 }
@@ -25,13 +25,13 @@ function show(data)
                 str="购买请求"
             else
                 str="归还请求"
-            var tr = $("<tr><th>" + data[i].id +
-                "</th><th>" + data[i].userId +
-                "</th><th>" + data[i].bookName +
-                "</th><th>" +str+
-                "</th><th>" +data[i].num+
-                "</th><th>" +
-                "<button class='booksearch' id=" + "defBtn" + i + ">完 成</button></th>" +
+            var tr = $("<tr><th class=\"number\">" + data[i].id +
+                "</th><th class=\"username\">" + data[i].userId +
+                "</th><th class=\"bookname\">" + data[i].bookName +
+                "</th><th class=\"dotype\">" +str+
+                "</th><th class=\"sum\">" +data[i].num+
+                "</th><th class=\"dobutton\">" +
+                "<button class='booksearch2' id=" + "defBtn" + i + ">完 成</button></th>" +
                 "</tr>");
             $("#OrderList").append(tr)
         }
@@ -45,10 +45,25 @@ function show(data)
                         $("#defBtn" + i).attr("disabled", true);
                     }
                     else{
-                        var num=prompt("请输入归还数量：")//弹出输入框
-                        var rt=define(data[i].id,data[i].handle,num);
-                        $("#defBtn" + i).css('background-color',gray);
-                        $("#defBtn" + i).attr("disabled", true);
+                        num=data[i].num;
+                        $.ajax({
+                            url:"/manager/define",
+                            type:"post",
+                            data:"handle="+data[i].handle+"&id="+data[i].id+"&num="+num,
+                            success:function (data) {
+                                if(data==true)
+                                {
+                                    $("#defBtn" + i).css('background-color','gray');
+                                    $("#defBtn" + i).attr("disabled", true);
+                                    alert("操作成功！")
+                                }
+                                else{
+                                    alert("操作失败！")
+                                }
+                            }
+                        })
+
+
                     }
 
                 })
@@ -56,10 +71,21 @@ function show(data)
         }
     }
     else {
-        var tr = $("<tr><td colspan=6 class='bookname'>" + "当前无订单" + "</td></tr>");
+        var tr = $("<tr><td colspan=6 style='text-align: center'>" + "当前无订单" + "</td></tr>");
         $("#OrderList").append(tr);
     }
 }
+$("#searchbt").click(function () {
+    var data=$("#searchtext").val()
+    $.ajax({
+        url:"/manager/search",
+        type:"post",
+        data:"input="+data,
+        success:function (response) {
+            show(response);
+        }
+    })
+})
 function showAll()
 {
     $.ajax({
@@ -91,17 +117,19 @@ $("#addmoney").click(function () {
         var u=$("#name").val();
         var m=$("#money").val();
     $.ajax({
-        url:"/user/recharge",
+        url:"/manager/recharge",
         type:"post",
-        data:"User_ID="+u+"&amount="+m,
+        data:"User_ID="+u+"&money="+m,
         success:function (data) {
-            if(data==true)
+            if(data==1)
             {
                 alert("充值成功！")
                 show()
             }
-            else
+            else if(data==2)
                 alert("充值失败！")
+            else if(data==3)
+                alert("找不到用户！")
         }
     })
 })

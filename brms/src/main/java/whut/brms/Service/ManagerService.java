@@ -6,13 +6,14 @@ import org.springframework.transaction.annotation.Transactional;
 import whut.brms.Mapper.BookMapper;
 import whut.brms.Mapper.PurchaseMapper;
 import whut.brms.Mapper.RentMapper;
+import whut.brms.Mapper.UserMapper;
 import whut.brms.entity.Book;
 import whut.brms.entity.Manager;
 import whut.brms.entity.Purchase;
 import whut.brms.entity.Rent;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -25,6 +26,10 @@ public class ManagerService {
     BookMapper bookMapper;
     @Autowired
     BookService bookService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    UserMapper userMapper;
     public List<Manager> showAll()
     {
         List<Rent> rents=rentMapper.queryRequesting();
@@ -84,10 +89,6 @@ public class ManagerService {
                 } else if (rent.getNum() > num && num > 0) {
                     if(bookService.payRent(Id)) {
                         bookMapper.addBook(num, rent.getBook_ID());//库中添加书籍
-                        rentMapper.subRentNum(num, Id);//减少记录中的数目
-                        rentMapper.insertRent(String.valueOf(System.currentTimeMillis()),
-                        rent.getUser_ID(), rent.getBook_ID(), rent.getRent_Date(),
-                                0, num);//生成新的记录
                     }
                 }
                 rentMapper.done(Id);
@@ -98,4 +99,58 @@ public class ManagerService {
         }
 
     }
+
+    /**
+     * 搜索订单
+     * String input
+     * @param input
+     * @return
+     */
+    public List<Manager> searchManager(String input){
+        input="%"+input+"%";
+        List<Rent> rents=rentMapper.searchRent(input);
+        List<Purchase> purchases=purchaseMapper.searchPurchase(input);
+        List<Manager> managers=new ArrayList<>();
+        for(Rent rent:rents){
+            Manager manager=new Manager();
+            manager.setId(rent.getRent_ID());
+            String bookId=rent.getBook_ID();
+            Book book =bookMapper.queryBookById(bookId);
+            manager.setBookName(book.getBook_Name());
+            manager.setBookId(bookId);
+            manager.setUserId(rent.getUser_ID());
+            if(rent.getHandle()==1)
+                manager.setHandle(1);
+            else
+                manager.setHandle(3);
+            manager.setNum(rent.getNum());
+            managers.add(manager);
+        }
+        for(Purchase purchase:purchases){
+            Manager manager=new Manager();
+            manager.setId(purchase.getPurchase_ID());
+            String bookId=purchase.getBook_ID();
+            Book book=bookMapper.queryBookById(bookId);
+            manager.setBookName(book.getBook_Name());
+            manager.setBookId(bookId);
+            manager.setUserId(purchase.getUser_ID());
+            manager.setHandle(2);
+            manager.setNum(purchase.getNum());
+            managers.add(manager);
+        }
+        return managers;
+
+
+    }
+    public int recharge(String User_ID,float money){
+        if(userMapper.queryUserById(User_ID)!=null)
+        {
+            if(userService.recharge(User_ID,money))
+                return 1;
+            else
+                return 0;
+        }
+        return 2;
+    }
+
 }

@@ -23,9 +23,9 @@ public class BookController {
     //借书
     @PostMapping("/rent")
     @ResponseBody
-    String rent(@RequestParam(value = "User_ID",required = true) String User_ID,
-              @RequestParam(value = "Book_ID",required = true) String Book_ID,
-                @RequestParam(value = "num",required = true) int num)
+    Object rent(@RequestParam(value = "User_ID",required = true) String User_ID,
+              @RequestParam(value = "Book_ID",required = true) String[] Book_ID,
+                @RequestParam(value = "num",required = true) int []num)
     {
         try {
             return bookService.RentBook(User_ID, Book_ID,num);
@@ -37,30 +37,25 @@ public class BookController {
     //买书
     @PostMapping("/purchase")
     @ResponseBody
-    String purchase(@RequestParam(value = "User_ID",required = true) String User_ID,
-    @RequestParam(value = "Book_ID",required = true) String ModelBook_ID,
-    @RequestParam(value = "num",required = true) int num)
+    Object purchase(@RequestParam(value = "User_ID",required = true) String User_ID,
+    @RequestParam(value = "Book_ID",required = true) String[] Book_ID,
+    @RequestParam(value = "num",required = true) int[] num)
     {
         try{
-            return bookService.PurchaseBook(User_ID,ModelBook_ID,num);
+            return bookService.PurchaseBook(User_ID,Book_ID,num);
         }
         catch (Exception e){
             return null;
         }
     }
-//    //还书
-//    @PostMapping("/returnBook")
-//    @ResponseBody
-//    boolean returnBook(@RequestParam(value = "Rent_ID",required = true) String Rent_ID)
-//    {
-//        try{
-//            bookService.ReturnBook(Rent_ID);
-//            return true;
-//        }catch (Exception e)
-//        {
-//            return false;
-//        }
-//    }
+    //还书
+    @PostMapping("/returnBook")
+    @ResponseBody
+    boolean returnBook(@RequestParam(value = "Rent_ID",required = true) String Rent_ID,
+                       @RequestParam(value = "num",required = true) int num)
+    {
+            return bookService.ReturnBook(Rent_ID,num);
+    }
     //通过搜索内容进行搜索全部书籍
     @PostMapping("/searchBookInput")
     @ResponseBody

@@ -15,7 +15,7 @@ function showRentRecord(data) {
         }
     }else
     {
-        var tr = $("<tr><td colspan=3 >"+"无"+"</td></tr>");
+        var tr = $("<tr><td colspan=3 style='text-align: center'>"+"无"+"</td></tr>");
         $("#purchaseRecord").append(tr);
     }
 

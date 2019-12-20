@@ -20,6 +20,8 @@ public class CartService {
     BookService bookService;
     @Autowired
     BookMapper bookMapper;
+    @Autowired
+    CartService cartService;
     /**
      * 添加购物车
      */
@@ -39,10 +41,12 @@ public class CartService {
      * 移出购物车
      */
     @Transactional
-    public boolean removeCart(String Cart_ID)
+    public boolean removeCart(String[] Cart_IDs)
     {
         try{
-            cartMapper.delCart(Cart_ID);
+            for(String Cart_ID:Cart_IDs) {
+                cartMapper.delCart(Cart_ID);
+            }
             return  true;
         }catch (Exception e)
         {
@@ -68,6 +72,7 @@ public class CartService {
             return null;
         }
     }
+
 
 
 }

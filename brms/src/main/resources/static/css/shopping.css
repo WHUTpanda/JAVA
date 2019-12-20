@@ -36,9 +36,12 @@
 .bookwriter {
 	width: 10vw;
 }
-
+.addtimetitle{
+	width: 10vw;
+}
 .addtime {
 	width: 10vw;
+	font-size: 1vw;
 }
 
 .bookprice {

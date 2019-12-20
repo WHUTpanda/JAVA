@@ -31,4 +31,12 @@ public interface PurchaseMapper {
      */
     @Update("update Purchase set Handle=0 where Purchase_ID=#{buyId}")
     void done(String buyId);
+
+    /**
+     * 根据输入查询
+     * @param input
+     * @return
+     */
+    @Select("select * from Purchase where Purchase_ID like #{input}")
+    List<Purchase> searchPurchase(String input);
 }

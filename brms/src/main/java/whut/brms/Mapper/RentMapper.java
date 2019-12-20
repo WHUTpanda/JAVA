@@ -16,7 +16,7 @@ public interface RentMapper {
             @Result(property = "Rent_Date", column = "Rent_Date"),
             @Result(column = "Return_Date", property = "Return_Date"),
             @Result(column = "User_ID", property = "User_ID"),
-            @Result(column = "Handle", property = "Handle"),
+            @Result(column = "Handle", property = "handle"),
             @Result(column = "Num", property = "num")
 
 
@@ -42,4 +42,12 @@ public interface RentMapper {
      */
     @Update("update Rent set Handle =0 where Rent_ID=#{rentId}")
     void done(String rentId);
+
+    /**
+     * 根据输入查询Rent
+     * @param input
+     * @return
+     */
+    @Select("select * from Rent where Rent_ID like #{input}")
+    List<Rent> searchRent(String input);
 }

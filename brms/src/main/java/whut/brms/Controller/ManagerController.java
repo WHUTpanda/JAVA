@@ -35,5 +35,29 @@ public class ManagerController {
         }
 
     }
+    @PostMapping("/search")
+    @ResponseBody
+    public List<Manager> search(@RequestParam(value = "input",required = true) String input)
+    {
+        try {
+
+            return managerService.searchManager(input);
+        }catch (Exception e){
+            return null;
+        }
+    }
+    /**
+     * 从管理员处充值
+     * @param User_ID
+     * @param money
+     * @return返回0为出错，1为成功，2为没有该用户
+     */
+    @PostMapping("/recharge")
+    @ResponseBody
+    public int recharge(@RequestParam(value = "User_ID",required = true) String User_ID,
+                        @RequestParam(value = "money",required = true) float money)
+    {
+        return managerService.recharge(User_ID, money);
+    }
 
 }

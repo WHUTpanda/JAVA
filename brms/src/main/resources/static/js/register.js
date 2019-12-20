@@ -3,7 +3,7 @@ $("#btn_register").click(function () {
     var p1=$("#password1").val();
     var p2=$("#password2").val();
 	var name=$("#username").val();
-	var tel=$("telephone").val();
+	var tel=$("#telephone").val();
     if(p1!=p2)
     {
         alert("前后两次密码输入不一致")

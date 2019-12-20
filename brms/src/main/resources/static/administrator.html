@@ -5,7 +5,7 @@
 	<title>管理员界面</title>
 	<link href="css/administrator.css" rel="stylesheet" type="text/css">
 	<script src="js/jQuery.js"></script>
-
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -14,21 +14,23 @@
 		<h2><a href="index.html" class="atype">图书租售系统管理员界面</a><span>Book rental system</span></h2>
 	</nav>
 	<ol class="top">
-		<li id="bookdeal" style="padding: 1vw; color:#DB1013;" onclick=clickit(2)>租书售书处理</li>
-		<li id="moneydeal" style="padding: 1vw;" onclick=clickit(1)>充值支付处理</li>
-		<button id="new" class="booksearch">刷新</button>
+		<li  class="deallable" id="bookdeal"  onclick=clickit(2)>租书售书处理</li>
+		<li class="moneylable" id="moneydeal"  onclick=clickit(1)>充值支付处理</li>
+		<li class="moneylable"><input type="text" class="search" id="searchtext"></li>
+		<li class="moneylable"><button id="searchbt">搜索</button> </li>
+		<div class="newdiv"><button id="new" class="booksearch">刷新</button></div>
 	</ol>
 
 	<div class="showplace">
 		<div id="dealplace">
 			<table class="showtable" id="tableup">
 				<tr>
-					<th>查询号码</th>
-					<th>用户名</th>
-					<th>书名</th>
-					<th>操作类型</th>
-					<th>数量</th>
-					<th>操作按钮</th>
+					<th class="number">查询号码</th>
+					<th class="username">用户名</th>
+					<th class="bookname">书名</th>
+					<th class="dotype">操作类型</th>
+					<th class="sum">数量</th>
+					<th class="dobutton">操作按钮</th>
 				</tr>
 			</table>
 			<table class="showtable" id="OrderList"></table>

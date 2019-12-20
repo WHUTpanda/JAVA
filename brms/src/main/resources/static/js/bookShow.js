@@ -50,29 +50,27 @@ function show(data) {
     $("#bookTable").empty("");
             if (data[0] != null) {
                 for (var i = 0; i < data.length; i++) {
-                    var tr = $("<tr onclick=toID("+data[i].book_ID+") id='row'"+i+"><th class=\"thbooknametitle\" >" + data[i].book_Name +
+                    var tr = $("<tr  id="+"row"+i+"><th class=\"thbooknametitle\" >" + data[i].book_Name +
                         "</th><th class=\"wttitle\">" + data[i].book_Writer +
                         "</th><th class=\"pctitle\">" + data[i].book_Price +
                         "</th><th class=\"dp\">" + data[i].book_description +
                         "</th><tr>");
                     $("#bookTable").append(tr)
                 }
-                for(var i=0;i<data.length;i++){
-                    $("row"+i).onclick(function () {
-                        window.sessionStorage.setItem("Book_ID",data[i].book_id);
+                for(var i=0;i<data.length;i++){(function (i) {
+                    $("#row"+i).click(function () {
+                        window.sessionStorage.setItem("Book_ID",data[i].book_ID);
                         location.href="selected.html"
                     })
+                })(i)
                 }
             }
             else {
-                var tr = $("<tr><td colspan=6 class='bookname'>" + "当前无书籍" + "</td></tr>");
+                var tr = $("<tr><td colspan=6 style='text-align: center'>" + "当前无书籍" + "</td></tr>");
                 $("#bookTable").append(tr);
             }
 }
-function toID(dataID) {
-    window.sessionStorage.setItem("Book_ID",dataID);
-    location.href="selected.html"
-}
+
 //点击搜索按钮
 $("#searchBtn").click(function rentx() {
     $("#bookTable").empty("");//清空除标题外的表格
